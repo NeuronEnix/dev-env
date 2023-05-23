@@ -1,11 +1,18 @@
-# Custom Alias
+# Add this in ~/.bashrc, ( is done to include this file in the .bashrc)
+# if [ -f ~/adoc/dev-env/bashrc_custom ]; then
+#     . ~/adoc/dev-env/bashrc_custom
+# fi
+
+# Kubectl
 alias kb='kubectl'
 alias kbgp='kubectl get pods'
 
+# Docker
 alias dcom='docker compose'
 alias dcomp='docker compose --profile'
 
 alias up-mysql='docker compose -f ~/adoc/dev-env/docker-compose.yml --profile mysql up -d'
+alias up-psql='docker compose -f ~/adoc/dev-env/docker-compose.yml --profile psql up -d'
 alias up-redis='docker compose -f ~/adoc/dev-env/docker-compose.yml --profile redis up -d'
 alias up-mongo='docker compose -f ~/adoc/dev-env/docker-compose.yml --profile mongo up -d'
 alias up-all='docker compose -f ~/adoc/dev-env/docker-compose.yml --profile all up -d'
