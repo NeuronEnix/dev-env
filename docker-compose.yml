@@ -5,7 +5,6 @@ networks:
     name: ${LOCAL_NETWORK}
     driver: bridge
 
-
 services:
 
   redis:
@@ -83,3 +82,33 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/
     depends_on:
       - mongo
+
+  psql:
+    image: postgres:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-psql
+    profiles: [ all, psql ]
+    restart: ${RESTART_POLICY}
+    volumes:
+      - ./vol/psql:/var/lib/postgresql/data
+    networks:
+      - local-net
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  adminer:
+    image: adminer:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-adminer
+    profiles: [ all, psql ]
+    restart: ${RESTART_POLICY}
+    networks:
+      - local-net
+    ports:
+      - 8083:8080
+    environment:
+      - ADMINER_UPLOAD_LIMIT=1G
+    depends_on:
+      - psql
