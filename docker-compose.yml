@@ -49,7 +49,7 @@ services:
     # command: bash -c "chmod +x /docker-entrypoint-initdb.d/1.sql && docker-entrypoint.sh mysqld"
 
   phpmyadmin:
-    image: phpmyadmin
+    image: phpmyadmin:latest
     container_name: ${COMPOSE_PROJECT_NAME}-phpmyadmin
     profiles: [ all, mysql ]
     restart: ${RESTART_POLICY}
@@ -80,7 +80,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
 
   mongo-express:
-    image: mongo-express
+    image: mongo-express:latest
     container_name: ${COMPOSE_PROJECT_NAME}-mongo_express
     profiles: [ all, mongo ]
     restart: ${RESTART_POLICY}
