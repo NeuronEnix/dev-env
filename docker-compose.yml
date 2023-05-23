@@ -19,6 +19,18 @@ services:
     ports:
       - 6379:6379
 
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: ${COMPOSE_PROJECT_NAME}-redis-commander
+    profiles: [ all, redis ]
+    restart: ${RESTART_POLICY}
+    networks:
+      - local-net
+    environment:
+    - REDIS_HOSTS=local-db-0:redis:6379:0
+    ports:
+    - 8081:8081
+
   mysql:
     image: mysql:latest
     container_name: ${COMPOSE_PROJECT_NAME}-mysql
@@ -44,7 +56,7 @@ services:
     networks:
       - local-net
     ports:
-      - 8081:80
+      - 8082:80
     environment:
       - PMA_ARBITRARY=1
       - UPLOAD_LIMIT=1G
@@ -75,7 +87,7 @@ services:
     networks:
       - local-net
     ports:
-      - 8082:8081
+      - 8083:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
@@ -107,7 +119,7 @@ services:
     networks:
       - local-net
     ports:
-      - 8083:8080
+      - 8084:8080
     environment:
       - ADMINER_UPLOAD_LIMIT=1G
     depends_on:
