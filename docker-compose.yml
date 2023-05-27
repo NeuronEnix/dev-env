@@ -65,7 +65,7 @@ services:
       - mysql
 
   mongo:
-    image: mongo:latest
+    image: mongo:4
     container_name: ${COMPOSE_PROJECT_NAME}-mongo
     profiles: [ all, mongo ]
     restart: ${RESTART_POLICY}
