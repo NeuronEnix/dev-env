@@ -21,11 +21,11 @@ To set up the project, please follow these steps:
   |    └── go
   ├── keys
   |  └── aws
-  |  | └── ec2.pem
+  |  | ├── ec2.pem
   |  | └── another-ec2.pem
   |  └── gcp
   |    └── key.pem
-  └── mounts (may contain soft links to other directories)
+  └── mounts (may contain soft links from/to other directories)
 ```
 
 This structure allows you to organize your projects, store encryption keys, and create symbolic links to external directories, if needed.
