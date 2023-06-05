@@ -15,6 +15,7 @@ from_apt=(
 )
 
 from_file=(
+  "Go( gvm ):gvm version:bash external/go-gvm.sh"
   "Docker:docker -v:bash external/docker.sh"
   "MongoDB Compass:mongodb-compass --version:bash external/mongodb-compass.sh"
 )
