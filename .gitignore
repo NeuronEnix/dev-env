@@ -1,2 +1,2 @@
-vol/*
-!vol/.gitkeep
+vol
+.env

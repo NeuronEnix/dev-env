@@ -7,4 +7,5 @@ mkdir -p ~/adoc/cloud/aws
 mkdir -p ~/adoc/cloud/gcp
 mkdir -p ~/adoc/cloud/az
 mkdir -p ~/adoc/mounts
+mkdir -p ~/adoc/rad
 mkdir -p ~/adoc/temp
