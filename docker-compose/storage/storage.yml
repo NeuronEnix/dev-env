@@ -1,0 +1,125 @@
+version: '3.8'
+
+networks:
+  net:
+    name: ${COMPOSE_NETWORK}
+    driver: bridge
+
+services:
+  redis:
+    image: ${REDIS_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-redis
+    profiles: [ all, redis ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/redis:/data
+    networks:
+      - net
+    ports:
+      - 6379:6379
+
+  redis-commander:
+    image: ${REDIS_COMMANDER_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-redis-commander
+    profiles: [ all, redis ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    environment:
+    - REDIS_HOSTS=local-db-0:redis:6379:0
+    ports:
+    - ${REDIS_COMMANDER_PORT}:8081
+
+  mysql:
+    image: ${MYSQL_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-mysql
+    profiles: [ all, mysql ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/mysql:/var/lib/mysql
+      # - ./setup/mysql.sql:/docker-entrypoint-initdb.d/1.sql
+    networks:
+      - net
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    # gives executable permission to run the init script
+    # command: bash -c "chmod +x /docker-entrypoint-initdb.d/1.sql && docker-entrypoint.sh mysqld"
+
+  phpmyadmin:
+    image: ${PHP_MY_ADMIN_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-phpmyadmin
+    profiles: [ all, mysql ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    ports:
+      - ${PHP_MY_ADMIN_PORT}:80
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=1G
+      - PMA_HOSTS=mysql
+    depends_on:
+      - mysql
+
+  mongo:
+    image: ${MONGO_DB_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-mongo
+    profiles: [ all, mongo ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/mongo:/data/db
+    networks:
+      - net
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+
+  mongo-express:
+    image: ${MONGO_EXPRESS_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-mongo_express
+    profiles: [ all, mongo ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    ports:
+      - ${MONGO_EXPRESS_PORT}:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_USERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/
+    depends_on:
+      - mongo
+
+  psql:
+    image: ${POSTGRES_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-psql
+    profiles: [ all, psql ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/psql:/var/lib/postgresql/data
+    networks:
+      - net
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  adminer:
+    image: ${ADMINER_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-adminer
+    profiles: [ all, psql ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    ports:
+      - ${ADMINER_PORT}:8080
+    environment:
+      - ADMINER_UPLOAD_LIMIT=1G
+    depends_on:
+      - psql

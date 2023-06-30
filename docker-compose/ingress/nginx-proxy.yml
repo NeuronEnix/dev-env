@@ -1,0 +1,23 @@
+version: '3.8'
+
+networks:
+  net:
+    name: ${COMPOSE_NETWORK}
+    driver: bridge
+
+services:
+  nginx-proxy:
+    image: ${NGINX_PROXY_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-nginx-proxy
+    profiles: [ all, nginx-proxy ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/nginx-proxy/data:/data
+      - ./vol/nginx-proxy/letsencrypt:/etc/letsencrypt
+    networks:
+      - net
+    ports:
+      - 80:80
+      - ${NGINX_PROXY_DASHBOARD_PORT}:81
+      - 443:443
+  
