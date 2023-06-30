@@ -1,0 +1,23 @@
+version: "3.8"
+
+networks:
+  net:
+    name: ${COMPOSE_NETWORK}
+    driver: bridge
+
+services:
+  chat-gpt:
+    # image: openai:gpt
+    image: ${OPENAI_CHAT_GPT_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-chat-gpt
+    profiles: [all, openai, chat-gpt]
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    ports:
+      - ${OPENAI_CHAT_GPT_PORT}:80
+    environment:
+      NODE_ENV: prod
+      OPENAI_API_KEY: ${OPENAI_CHAT_GPT_API_KEY}
+      PORT: 80
+      PAYLOAD_CAP: 1mb
