@@ -50,7 +50,7 @@ services:
   phpmyadmin:
     image: ${PHP_MY_ADMIN_IMAGE}
     container_name: ${COMPOSE_PROJECT_PREFIX}-phpmyadmin
-    profiles: [ all, mysql ]
+    profiles: [ all, pma, mysql ]
     restart: ${COMPOSE_RESTART_POLICY}
     networks:
       - net

@@ -8,6 +8,7 @@ alias dcomp='docker compose --profile'
 
 # Docker Compose Storage Commands
 alias up-mysql='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile mysql up -d'
+alias up-pma='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile pma up -d'
 alias up-psql='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile psql up -d'
 alias up-redis='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile redis up -d'
 alias up-mongo='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile mongo up -d'
