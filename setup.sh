@@ -1,5 +1,9 @@
-bashrc_custom='if [ -f ~/adoc/dev-env/bashrc_custom ]; then . ~/adoc/dev-env/bashrc_custom; fi'
-if ! grep -qxF "$bashrc_custom" ~/.bashrc; then printf "\n# dev-env bashrc_custom\n$bashrc_custom\n" >> ~/.bashrc; fi
+custom_path='~/adoc/dev-env/bashrc/bashrc_default'
+bashrc_custom="if [ -f $custom_path ]; then . $custom_path; fi"
+
+if ! grep -qxF "$bashrc_custom" ~/.bashrc; then
+  printf "\n# dev-env bashrc_custom\n%s\n" "$bashrc_custom" >> ~/.bashrc
+fi
 
 # defualt directory structure
 mkdir -p ~/adoc/proj

@@ -21,4 +21,4 @@ alias down-nginx='docker compose -f ~/adoc/dev-env/docker-compose/ingress/nginx-
 
 
 # Extra commands goes here
-if [ -f ~/adoc/dev-env/bashrc_extra ]; then . ~/adoc/dev-env/bashrc_extra; fi
+if [ -f ~/adoc/dev-env/bashrc/bashrc_extra ]; then . ~/adoc/dev-env/bashrc/bashrc_extra; fi
