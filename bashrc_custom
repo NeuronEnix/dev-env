@@ -6,9 +6,14 @@ alias kbgp='kubectl get pods'
 alias dcom='docker compose'
 alias dcomp='docker compose --profile'
 
+# Docker Compose Storage Commands
 alias up-mysql='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile mysql up -d'
 alias up-psql='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile psql up -d'
 alias up-redis='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile redis up -d'
 alias up-mongo='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile mongo up -d'
-alias up-all-storage='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile all up -d'
-alias down-all-storage='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile all down'
+alias up-storage='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile all up -d'
+alias down-storage='docker compose -f ~/adoc/dev-env/docker-compose/storage/storage.yml --profile all down'
+
+# Docker Compose Ingress Commands
+alias up-nginx='docker compose -f ~/adoc/dev-env/docker-compose/ingress/nginx-proxy.yml --profile nginx-proxy up -d'
+alias down-nginx='docker compose -f ~/adoc/dev-env/docker-compose/ingress/nginx-proxy.yml --profile nginx-proxy down'
