@@ -18,3 +18,7 @@ alias down-storage='docker compose -f ~/adoc/dev-env/docker-compose/storage/stor
 # Docker Compose Ingress Commands
 alias up-nginx='docker compose -f ~/adoc/dev-env/docker-compose/ingress/nginx-proxy.yml --profile nginx-proxy up -d'
 alias down-nginx='docker compose -f ~/adoc/dev-env/docker-compose/ingress/nginx-proxy.yml --profile nginx-proxy down'
+
+
+# Extra commands goes here
+if [ -f ~/adoc/dev-env/bashrc_extra ]; then . ~/adoc/dev-env/bashrc_extra; fi
