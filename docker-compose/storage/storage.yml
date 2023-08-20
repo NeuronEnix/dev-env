@@ -12,7 +12,7 @@ services:
     profiles: [ all, redis ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./.vol/redis:/data
+      - .vol/redis:/data
     networks:
       - net
     ports:
@@ -36,7 +36,7 @@ services:
     profiles: [ all, mysql ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./.vol/mysql:/var/lib/mysql
+      - .vol/mysql:/var/lib/mysql
       # - ./setup/mysql.sql:/docker-entrypoint-initdb.d/1.sql
     networks:
       - net
@@ -69,7 +69,7 @@ services:
     profiles: [ all, mongo ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./.vol/mongo:/data/db
+      - .vol/mongo:/data/db
     networks:
       - net
     ports:
@@ -100,7 +100,7 @@ services:
     profiles: [ all, psql ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./.vol/psql:/var/lib/postgresql/data
+      - .vol/psql:/var/lib/postgresql/data
     networks:
       - net
     ports:
@@ -130,7 +130,7 @@ services:
     profiles: [ all, couchdb ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./.vol/couchdb:/opt/couchdb/data
+      - .vol/couchdb:/opt/couchdb/data
     networks:
       - net
     ports:

@@ -12,8 +12,8 @@ services:
     profiles: [ all, nginx-proxy ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/nginx-proxy/data:/data
-      - ./vol/nginx-proxy/letsencrypt:/etc/letsencrypt
+      - .vol/nginx-proxy/data:/data
+      - .vol/nginx-proxy/letsencrypt:/etc/letsencrypt
     networks:
       - net
     ports:
