@@ -23,7 +23,7 @@ services:
 
   journal:
     image: ${JOURNAL_IMAGE}
-    container_name: ${COMPOSE_PROJECT_PREFIX}-jr
+    container_name: ${COMPOSE_PROJECT_PREFIX}-journal
     profiles: [all, jr]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
