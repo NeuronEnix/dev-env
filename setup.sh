@@ -1,4 +1,4 @@
-custom_path='~/adoc/dev-env/bashrc/bashrc_default'
+custom_path='~/dev-env/bashrc/bashrc_default'
 bashrc_custom="if [ -f $custom_path ]; then . $custom_path; fi"
 
 if ! grep -qxF "$bashrc_custom" ~/.bashrc; then
@@ -12,4 +12,4 @@ mkdir -p ~/adoc/cloud/gcp
 mkdir -p ~/adoc/cloud/az
 mkdir -p ~/adoc/mounts
 mkdir -p ~/adoc/rad
-mkdir -p ~/adoc/temp
+mkdir -p ~/adoc/tmp
