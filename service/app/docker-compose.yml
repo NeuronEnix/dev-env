@@ -9,7 +9,7 @@ services:
   chat-gpt:
     image: ${OPENAI_CHAT_GPT_IMAGE}
     container_name: ${COMPOSE_PROJECT_PREFIX}-chat-gpt
-    profiles: [all, openai, chat-gpt]
+    profiles: [all, gpt ]
     restart: ${COMPOSE_RESTART_POLICY}
     networks:
       - net

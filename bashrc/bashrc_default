@@ -6,6 +6,17 @@ alias kbgp='kubectl get pods'
 alias dcom='docker compose'
 alias dcomp='docker compose --profile'
 
+# Docker Compose App Commands
+alias up-app='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile all up -d'
+alias down-app='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile all down'
+alias up-gpt='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile gpt up -d'
+alias up-jr='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile jr up -d'
+
+# Docker Compose Ingress Commands
+alias up-ingress='docker compose -f ~/dev-env/service/ingress/docker-compose.yml --profile all up -d'
+alias down-ingress='docker compose -f ~/dev-env/service/ingress/docker-compose.yml --profile all down'
+
+
 # Docker Compose Storage Commands
 alias up-storage='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile all up -d'
 alias down-storage='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile all down'
@@ -15,10 +26,6 @@ alias up-pma='docker compose -f ~/dev-env/service/storage/docker-compose.yml --p
 alias up-mongo='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile mongo up -d'
 alias up-psql='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile psql up -d'
 alias up-couchdb='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile couchdb up -d'
-
-# Docker Compose Ingress Commands
-alias up-ingress='docker compose -f ~/dev-env/service/ingress/docker-compose.yml --profile all up -d'
-alias down-ingress='docker compose -f ~/dev-env/service/ingress/docker-compose.yml --profile all down'
 
 
 # Extra commands goes here
