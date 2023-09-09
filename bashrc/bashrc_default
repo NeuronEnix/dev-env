@@ -7,18 +7,18 @@ alias dcom='docker compose'
 alias dcomp='docker compose --profile'
 
 # Docker Compose Storage Commands
-alias up-storage='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile all up -d'
-alias down-storage='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile all down'
-alias up-redis='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile redis up -d'
-alias up-mysql='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile mysql up -d'
-alias up-pma='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile pma up -d'
-alias up-mongo='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile mongo up -d'
-alias up-psql='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile psql up -d'
-alias up-couchdb='docker compose -f ~/dev-env/docker-compose/storage/docker-compose.yml --profile couchdb up -d'
+alias up-storage='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile all up -d'
+alias down-storage='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile all down'
+alias up-redis='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile redis up -d'
+alias up-mysql='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile mysql up -d'
+alias up-pma='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile pma up -d'
+alias up-mongo='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile mongo up -d'
+alias up-psql='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile psql up -d'
+alias up-couchdb='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile couchdb up -d'
 
 # Docker Compose Ingress Commands
-alias up-ingress='docker compose -f ~/dev-env/docker-compose/ingress/docker-compose.yml --profile all up -d'
-alias down-ingress='docker compose -f ~/dev-env/docker-compose/ingress/docker-compose.yml --profile all down'
+alias up-ingress='docker compose -f ~/dev-env/service/ingress/docker-compose.yml --profile all up -d'
+alias down-ingress='docker compose -f ~/dev-env/service/ingress/docker-compose.yml --profile all down'
 
 
 # Extra commands goes here
