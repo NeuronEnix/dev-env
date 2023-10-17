@@ -11,7 +11,8 @@ alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wa
 alias up-app='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile all up -d'
 alias down-app='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile all down'
 alias up-gpt='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile gpt up -d'
-alias up-jr='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile jr up -d'
+alias up-ft='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile ft up -d'
+alias down-ft='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile ft down'
 
 # Docker Compose Ingress Commands
 alias up-ingress='docker compose -f ~/dev-env/service/ingress/docker-compose.yml --profile all up -d'

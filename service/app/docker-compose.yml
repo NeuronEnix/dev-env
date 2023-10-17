@@ -21,18 +21,14 @@ services:
       PORT: 80
       PAYLOAD_CAP: 1mb
 
-  journal:
-    image: ${JOURNAL_IMAGE}
-    container_name: ${COMPOSE_PROJECT_PREFIX}-journal
-    profiles: [all, jr]
+  file-tray:
+    image: ${FILE_TRAY_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-file-tray
+    profiles: [all, ft]
     restart: ${COMPOSE_RESTART_POLICY}
-    volumes:
-      - .vol/journal:/app/data
     networks:
       - net
-    # ports:
-    #   - 9900:9900
-    #   - 8080:5001
+    ports:
+      - ${FILE_TRAY_PORT}:80
     environment:
-      KEMAL_ENV: ${JOURNAL_KEMAL_ENV}
-      JWT_SECRET: ${JOURNAL_JWT_SECRET}
+      PORT: 80
