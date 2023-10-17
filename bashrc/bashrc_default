@@ -5,6 +5,7 @@ alias kbgp='kubectl get pods'
 # Docker
 alias dcom='docker compose'
 alias dcomp='docker compose --profile'
+alias dive="docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive"
 
 # Docker Compose App Commands
 alias up-app='docker compose -f ~/dev-env/service/app/docker-compose.yml --profile all up -d'
