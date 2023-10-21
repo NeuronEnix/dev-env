@@ -30,5 +30,6 @@ alias up-psql='docker compose -f ~/dev-env/service/storage/docker-compose.yml --
 alias up-couchdb='docker compose -f ~/dev-env/service/storage/docker-compose.yml --profile couchdb up -d'
 
 
-# Extra commands goes here
+# Extra commands scripts goes here
 if [ -f ~/dev-env/bashrc/bashrc_extra ]; then . ~/dev-env/bashrc/bashrc_extra; fi
+if [ -f ~/dev-env/bashrc/bashrcExtra.sh ]; then . ~/dev-env/bashrc/bashrcExtra.sh; fi

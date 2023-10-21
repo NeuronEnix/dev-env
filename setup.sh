@@ -1,4 +1,4 @@
-custom_path='~/dev-env/bashrc/bashrc_default'
+custom_path='~/dev-env/bashrc/bashrc.sh'
 bashrc_custom="if [ -f $custom_path ]; then . $custom_path; fi"
 
 if ! grep -qxF "$bashrc_custom" ~/.bashrc; then
