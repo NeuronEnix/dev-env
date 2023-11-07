@@ -14,7 +14,37 @@ function setKubernetesCommand() {
   cmdList.push(
     "\n# Kubernetes Command",
     "alias kb='kubectl'",
-    "alias kbgp='kubectl get pods'",
+    "alias kba='kb apply -f'",
+    
+    "alias kbc='kb config'",
+      "alias kbcg='kbc get-contexts'",
+      "alias kbcs='kbc set-context --current'",
+      
+    "alias kbd='kb delete -f'",
+    
+    "alias kbg='kb get'",
+      "alias kbgd='kbg deployments'",
+      "alias kbgi='kbg ingress'",
+      "alias kbgp='kbg pods'",
+      "alias kbgpv='kbg pv'",
+      "alias kbgpvc='kbg pvc'",
+      "alias kbgs='kb get services'",
+      
+    "alias kbl='kb logs'",
+      "alias kblf='kbl -f'",
+      
+    "alias kbr='kb restart -f'",
+    
+    "alias kbx='kb exec -it'",
+  )
+}
+
+function setMinikubeCommand() {
+  cmdList.push(
+    "\n# Minikube Command",
+    "alias mk='minikube'",
+    "alias mki='mk image'",
+    "alias mkil='mki load'",
   )
 }
 
@@ -57,6 +87,7 @@ setCustomCommand()
 setKubernetesCommand()
 setDockerCommand()
 setDockerServiceCommand()
+setMinikubeCommand()
 
 // Write Commands
 fs.writeFileSync( filePath, cmdList.join("\n") );
