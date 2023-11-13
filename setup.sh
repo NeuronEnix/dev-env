@@ -2,19 +2,20 @@ custom_path='~/dev-env/bashrc/bashrc.sh'
 bashrc_custom="if [ -f $custom_path ]; then . $custom_path; fi"
 
 if ! grep -qxF "$bashrc_custom" ~/.bashrc; then
+
   printf "\n# dev-env bashrc_custom\n%s\n" "$bashrc_custom" >> ~/.bashrc
-  echo "bashrc_custom import set"
+  echo "Set: dev-env bashrc script in .bashrc"
 fi
 
 # defualt directory structure
-mkdir -p ~/adoc/proj
-mkdir -p ~/adoc/cloud/aws
-mkdir -p ~/adoc/cloud/gcp
-mkdir -p ~/adoc/cloud/az
-mkdir -p ~/adoc/mounts
+mkdir -p ~/adoc/prj
+mkdir -p ~/adoc/cld/aws
+mkdir -p ~/adoc/cld/gcp
+mkdir -p ~/adoc/cld/az
+mkdir -p ~/adoc/mnt
 mkdir -p ~/adoc/rad
 mkdir -p ~/adoc/tmp
-echo "Directories created"
+echo "Directory created: ~/adoc"
 
 # Check if node is installed
 if command -v node &> /dev/null; then
