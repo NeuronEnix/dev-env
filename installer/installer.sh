@@ -1,29 +1,33 @@
 #!/bin/bash
 
 # List of available programs and their installation commands
-from_snap=(
-  "VS Code:code -v:sudo snap install --classic code"
-  "Sublime:subl -v:sudo snap install sublime-text --classic"
-  "Postman:command -v postman:sudo snap install postman"
-  "Slack:slack -v:sudo snap install slack"
-  "Another Redis Desktop Manager:command -v another-redis-desktop-manager:sudo snap install another-redis-desktop-manager"
-)
 
 from_apt=(
   "Curl:curl --version:sudo apt install curl"
   "Wget:wget --version:sudo apt install wget"
 )
 
+from_snap=(
+  "Another Redis Desktop Manager:command -v another-redis-desktop-manager:sudo snap install another-redis-desktop-manager"
+  "Obsidian:command -v obsidian:sudo snap install obsidian --classic"
+  "Postman:command -v postman:sudo snap install postman"
+  "Slack:slack -v:sudo snap install slack"
+  "Sublime:subl -v:sudo snap install sublime-text --classic"
+  "VS Code:code -v:sudo snap install --classic code"
+)
+
 from_file=(
-  "Go( gvm ):gvm version:bash external/go-gvm.sh"
-  "Node( nvm ):ls ~/.nvm/nvm.sh:bash external/node-nvm.sh"
+  "aws cli:aws --version:bash external/aws-cli.sh"
   "Docker:docker -v:bash external/docker.sh"
+  "Go( gvm ):gvm version:bash external/go-gvm.sh"
+  "Google Chrome:google-chrome --version:bash external/google-chrome.sh"
   "MongoDB Compass:mongodb-compass --version:bash external/mongodb-compass.sh"
+  "Node( nvm ):ls ~/.nvm/nvm.sh:bash external/node-nvm.sh"
 )
 
 available_app=()
-available_app+=("${from_snap[@]}")
 available_app+=("${from_apt[@]}")
+available_app+=("${from_snap[@]}")
 available_app+=("${from_file[@]}")
 
 while true; do
