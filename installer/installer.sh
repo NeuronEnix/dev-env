@@ -21,6 +21,7 @@ from_file=(
   "Docker:docker -v:bash external/docker.sh"
   "Go( gvm ):gvm version:bash external/go-gvm.sh"
   "Google Chrome:google-chrome --version:bash external/google-chrome.sh"
+  "Minikube:minikube version:bash external/minikube.sh"
   "MongoDB Compass:mongodb-compass --version:bash external/mongodb-compass.sh"
   "Node( nvm ):ls ~/.nvm/nvm.sh:bash external/node-nvm.sh"
 )
