@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # List of available programs and their installation commands
-FILE_INSTALL_PATH="$(dirname "$0")/external"
+FILE_INSTALL_PATH="$(dirname "$0")/multiline-install-script"
 
 from_apt=(
   "Curl:curl --version:sudo apt -y install curl"
