@@ -1,0 +1,8 @@
+alias d='docker'
+alias d-='docker'
+alias d-i='d- image'
+  alias d-il='d-i ls'
+alias d-ip='d-i prune'
+alias d-com='d- compose'
+  alias d-comp='d-com --profile'
+alias d-dive='docker run -ti --rm  -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive'
