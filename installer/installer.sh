@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # List of available programs and their installation commands
+FILE_INSTALL_PATH="$(dirname "$0")/external"
 
 from_apt=(
-  "Curl:curl --version:sudo apt install curl"
-  "Wget:wget --version:sudo apt install wget"
+  "Curl:curl --version:sudo apt -y install curl"
+  "Wget:wget --version:sudo apt -y install wget"
 )
 
 from_snap=(
@@ -17,13 +18,13 @@ from_snap=(
 )
 
 from_file=(
-  "aws cli:aws --version:bash external/aws-cli.sh"
-  "Docker:docker -v:bash external/docker.sh"
-  "Go( gvm ):gvm version:bash external/go-gvm.sh"
-  "Google Chrome:google-chrome --version:bash external/google-chrome.sh"
-  "Minikube:minikube version:bash external/minikube.sh"
-  "MongoDB Compass:mongodb-compass --version:bash external/mongodb-compass.sh"
-  "Node( nvm ):ls ~/.nvm/nvm.sh:bash external/node-nvm.sh"
+  "aws cli:aws --version:bash $FILE_INSTALL_PATH/aws-cli.sh"
+  "Docker:docker -v:bash $FILE_INSTALL_PATH/docker.sh"
+  "Go( gvm ):gvm version:bash $FILE_INSTALL_PATH/go-gvm.sh"
+  "Google Chrome:google-chrome --version:bash $FILE_INSTALL_PATH/google-chrome.sh"
+  "Minikube:minikube version:bash $FILE_INSTALL_PATH/minikube.sh"
+  "MongoDB Compass:mongodb-compass --version:bash $FILE_INSTALL_PATH/mongodb-compass.sh"
+  "Node( nvm ):ls ~/.nvm/nvm.sh:bash $FILE_INSTALL_PATH/node-nvm.sh"
 )
 
 available_app=()
@@ -32,6 +33,8 @@ available_app+=("${from_snap[@]}")
 available_app+=("${from_file[@]}")
 
 while true; do
+  source ~/.bashrc
+  
   to_install=()
   echo
   echo "Installed Program"
@@ -73,8 +76,11 @@ while true; do
 
   read -p "Install( num space seperated ): " choice
 
+  sudo apt update
+
   # if choice is  0 then install all avaialble app
   if [[ $choice -eq 0 ]]; then
+
     for p in "${to_install[@]}"; do
       label=$(echo "$p" | cut -d ':' -f 1)
       install_script=$(echo "$p" | cut -d ':' -f 3)
