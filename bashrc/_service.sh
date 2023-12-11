@@ -6,9 +6,11 @@ STORAGE_COMMAND="$BASE_COMMAND/storage/docker-compose.yml --profile"
 alias up-app-all='$APP_COMMAND all up -d'
 alias up-app-gpt='$APP_COMMAND gpt up -d'
 alias up-app-ft='$APP_COMMAND ft up -d'
+alias up-app-actual='$APP_COMMAND actual up -d'
 alias down-app-all='$APP_COMMAND all down'
 alias down-app-gpt='$APP_COMMAND gpt down'
 alias down-app-ft='$APP_COMMAND ft down'
+alias down-app-actual='$APP_COMMAND actual down'
 
 alias up-ingress-all='$INGRESS_COMMAND all up -d'
 alias down-ingress-all='$INGRESS_COMMAND all down'
