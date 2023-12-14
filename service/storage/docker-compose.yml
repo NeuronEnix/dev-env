@@ -113,7 +113,7 @@ services:
   adminer:
     image: ${ADMINER_IMAGE}
     container_name: ${COMPOSE_PROJECT_PREFIX}-adminer
-    profiles: [ all, psql ]
+    profiles: [ all, adminer ]
     restart: ${COMPOSE_RESTART_POLICY}
     networks:
       - net
@@ -121,8 +121,6 @@ services:
       - ${ADMINER_PORT}:8080
     environment:
       - ADMINER_UPLOAD_LIMIT=1G
-    depends_on:
-      - psql
 
   couchdb:
     image: ${COUCH_DB_IMAGE}
