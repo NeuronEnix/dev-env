@@ -2,8 +2,8 @@ version: '3.8'
 
 networks:
   net:
-    name: ${COMPOSE_NETWORK}
-    driver: bridge
+    name: dev
+    external: true
 
 services:
   nginx-proxy:
@@ -20,4 +20,3 @@ services:
       - 80:80
       - ${NGINX_PROXY_DASHBOARD_PORT}:81
       - 443:443
-  

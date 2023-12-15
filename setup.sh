@@ -27,6 +27,9 @@ if [ ! -f "./service/ingress/.env" ]; then cp ./service/ingress/.env.example ./s
 if [ ! -f "./service/storage/.env" ]; then cp ./service/storage/.env.example ./service/storage/.env; fi
   echo "  - ok: Created storage/.env"
 
+mkdir -p ./service/app/vol ./service/ingress/vol ./service/storage/vol &&
+  echo "  - ok: mkdir app/vol ingress/vol storage/vol"
+
 echo "\n-> Set: Soft link"
 source_file="$HOME/.bashrc"
 destination_file="softLink/bashrc.sh"

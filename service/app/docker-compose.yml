@@ -2,8 +2,8 @@ version: "3.8"
 
 networks:
   net:
-    name: ${COMPOSE_NETWORK}
-    driver: bridge
+    name: dev
+    external: true
 
 services:
   chat-gpt:
