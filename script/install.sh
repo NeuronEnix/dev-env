@@ -22,6 +22,7 @@ from_file=(
   "Docker:docker -v:bash $FILE_INSTALL_PATH/docker.sh"
   "Go( gvm ):gvm version:bash $FILE_INSTALL_PATH/go-gvm.sh"
   "Google Chrome:google-chrome --version:bash $FILE_INSTALL_PATH/google-chrome.sh"
+  "Kubectl:kubectl version --client:bash $FILE_INSTALL_PATH/kubectl.sh"
   "Minikube:minikube version:bash $FILE_INSTALL_PATH/minikube.sh"
   "MongoDB Compass:mongodb-compass --version:bash $FILE_INSTALL_PATH/mongodb-compass.sh"
   "Node( nvm ):ls ~/.nvm/nvm.sh:bash $FILE_INSTALL_PATH/node-nvm.sh"
@@ -34,7 +35,7 @@ available_app+=("${from_file[@]}")
 
 while true; do
   source ~/.bashrc
-  
+
   to_install=()
   echo
   echo "Installed Program"
@@ -45,7 +46,7 @@ while true; do
 
 
     eval "$version_finder" > /dev/null 2>&1
-    
+
     # Check the exit status
     if [[ $? -eq 0 ]]; then
       echo "$counter: $label"
@@ -90,7 +91,7 @@ while true; do
       eval $install_script
 
     done
-  
+
   else
 
     # if choice not 0 then install only thing that is choosen
