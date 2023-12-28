@@ -30,16 +30,4 @@ if [ ! -f "./service/storage/.env" ]; then cp ./service/storage/.env.example ./s
 mkdir -p ./service/app/vol ./service/ingress/vol ./service/storage/vol &&
   echo "  - ok: mkdir app/vol ingress/vol storage/vol"
 
-echo "\n-> Set: Soft link"
-source_file="$HOME/.bashrc"
-destination_file="softLink/bashrc.sh"
-if [ -f "$source_file" ] && [ ! -L "$destination_file" ]; then
-  ln -s "$source_file" "$destination_file"
-  echo "  - ok: Created $destination_file"
-fi
-source_file="$HOME/.ssh"
-destination_file="softLink/.ssh"
-if [ -d "$source_file" ] && [ ! -L "$destination_file" ]; then
-  ln -s "$source_file" "$destination_file"
-  echo "  - ok: Created $destination_file"
-fi
+sh softLink/_main.sh
