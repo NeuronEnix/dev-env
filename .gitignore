@@ -4,3 +4,4 @@ vol
 bashExtended.sh
 softLink/*
 !softLink/_main.sh
+bashrc/_custom.sh

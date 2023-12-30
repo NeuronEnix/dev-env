@@ -19,6 +19,7 @@ mkdir -p ~/adoc/rad
 mkdir -p ~/adoc/tmp
 
 if [ ! -f "~/adoc/minify.js" ]; then cp ./script/minify.js ~/adoc/minify.js; fi
+touch bashrc/_custom.sh
 echo "  - ok: Succefully set"
 
 
