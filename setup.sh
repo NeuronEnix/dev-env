@@ -17,7 +17,10 @@ mkdir -p ~/adoc/cld/az
 mkdir -p ~/adoc/mnt
 mkdir -p ~/adoc/rad
 mkdir -p ~/adoc/tmp
+
+if [ ! -f "~/adoc/minify.js" ]; then cp ./script/minify.js ~/adoc/minify.js; fi
 echo "  - ok: Succefully set"
+
 
 echo "\n-> Set: service"
 if [ ! -f "./service/app/.env" ]; then cp ./service/app/.env.example ./service/app/.env; fi
