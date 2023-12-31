@@ -10,6 +10,9 @@ echo "  - ok: Succefully set"
 
 echo "\n-> Set: Default directories"
 mkdir -p ./softLink
+echo "  - ok: Added dev-env/softLink"
+
+mkdir -p ~/kms/general
 mkdir -p ~/adoc/prj
 mkdir -p ~/adoc/cld/aws
 mkdir -p ~/adoc/cld/gcp
@@ -17,10 +20,10 @@ mkdir -p ~/adoc/cld/az
 mkdir -p ~/adoc/mnt
 mkdir -p ~/adoc/rad
 mkdir -p ~/adoc/tmp
+echo "  - ok: Added adoc dir struct"
 
-if [ ! -f "~/adoc/minify.js" ]; then cp ./script/minify.js ~/adoc/minify.js; fi
 touch bashrc/_custom.sh
-echo "  - ok: Succefully set"
+echo "  - ok: Added bashrc/_custom.sh"
 
 
 echo "\n-> Set: service"
