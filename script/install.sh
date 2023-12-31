@@ -26,6 +26,7 @@ from_file=(
   "Minikube:minikube version:bash $FILE_INSTALL_PATH/minikube.sh"
   "MongoDB Compass:mongodb-compass --version:bash $FILE_INSTALL_PATH/mongodb-compass.sh"
   "Node( nvm ):ls ~/.nvm/nvm.sh:bash $FILE_INSTALL_PATH/node-nvm.sh"
+  "Signal Desktop:command -v signal-desktop:bash $FILE_INSTALL_PATH/signal.sh"
 )
 
 available_app=()
