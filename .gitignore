@@ -2,6 +2,6 @@ vol
 .vol
 .env
 bashExtended.sh
-softLink/*
-!softLink/_main.sh
+softLink
+softLink.old
 bashrc/_custom.sh

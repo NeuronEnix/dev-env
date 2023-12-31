@@ -34,4 +34,4 @@ if [ ! -f "./service/storage/.env" ]; then cp ./service/storage/.env.example ./s
 mkdir -p ./service/app/vol ./service/ingress/vol ./service/storage/vol &&
   echo "  - ok: mkdir app/vol ingress/vol storage/vol"
 
-sh softLink/_main.sh
+sh script/soft-link.sh
