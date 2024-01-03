@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-backup_dir="$HOME/backup-$(hostname)/$(date +"%Y_%m_%d-%H_%M_%S")"
+backup_dir="$HOME/abkp/bk-$(hostname)-$(date +"%Y_%m_%d-%H_%M_%S")"
 mkdir -p "$backup_dir"
 
 # Backup ~/dev-env
