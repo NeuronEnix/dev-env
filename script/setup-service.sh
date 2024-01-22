@@ -1,5 +1,5 @@
-docker volume create dev-app
-docker volume create dev-ingress
-docker volume create dev-storage
+sudo docker volume create dev-app
+sudo docker volume create dev-ingress
+sudo docker volume create dev-storage
 
-docker network create dev
+sudo docker network create dev

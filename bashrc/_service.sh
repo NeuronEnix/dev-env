@@ -1,4 +1,4 @@
-BASE_COMMAND="docker compose -f $HOME/dev-env/service"
+BASE_COMMAND="sudo docker compose -f $HOME/dev-env/service"
 APP_COMMAND="$BASE_COMMAND/app/docker-compose.yml --profile"
 INGRESS_COMMAND="$BASE_COMMAND/ingress/docker-compose.yml --profile"
 STORAGE_COMMAND="$BASE_COMMAND/storage/docker-compose.yml --profile"
