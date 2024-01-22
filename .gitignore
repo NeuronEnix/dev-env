@@ -4,4 +4,6 @@ vol
 bashExtended.sh
 softLink
 softLink.old
+symlink
 bashrc/_custom.sh
+node_modules

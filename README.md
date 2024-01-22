@@ -1,6 +1,8 @@
 # Dev-Env
 
 Development Environment
-
-1. Run first: `sh setup.sh`
-2. To install: `bash script/install.sh`
+- Install `nvm`: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+  - `nvm` repo: `https://github.com/nvm-sh/nvm`
+- Run
+  1. `npm i`
+  2. `npm run setup`
