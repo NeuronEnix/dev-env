@@ -9,7 +9,7 @@ cd ~/dev-env
 sudo zip -r "$backup_dir/dev-env.zip" .
 
 # Backup ~/adoc
-cd ~/adoc/kms
+cd ~/kms
 sudo zip -r "$backup_dir/kms.zip" .
 
 # Backup ~/adoc
