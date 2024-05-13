@@ -1,6 +1,6 @@
 BASE_COMMAND="sudo docker compose -f $HOME/dev-env/service"
 APP_COMMAND="$BASE_COMMAND/app/docker-compose.yml --profile"
-INGRESS_COMMAND="$BASE_COMMAND/ingress/docker-compose.yml --profile"
+MANAGER_COMMAND="$BASE_COMMAND/manager/docker-compose.yml --profile"
 STORAGE_COMMAND="$BASE_COMMAND/storage/docker-compose.yml --profile"
 
 alias up-app-all='$APP_COMMAND all up -d'
@@ -14,8 +14,14 @@ alias down-app-ft='$APP_COMMAND ft down'
 alias down-app-actual='$APP_COMMAND actual down'
 alias down-app-i-spy='$APP_COMMAND i-spy down'
 
-alias up-ingress-all='$INGRESS_COMMAND all up -d'
-alias down-ingress-all='$INGRESS_COMMAND all down'
+alias up-manager-all='$MANAGER_COMMAND all up -d'
+alias up-manager-nginx='$MANAGER_COMMAND nginx-proxy up -d'
+alias up-manager-portainer='$MANAGER_COMMAND portainer up -d'
+alias up-manager-portainer-agent='$MANAGER_COMMAND portainer-agent up -d'
+alias down-manager-all='$MANAGER_COMMAND all down'
+alias down-manager-nginx='$MANAGER_COMMAND nginx-proxy down'
+alias down-manager-portainer='$MANAGER_COMMAND portainer down'
+alias down-manager-portainer-agent='$MANAGER_COMMAND portainer-agent down'
 
 alias up-storage-all='$STORAGE_COMMAND all up -d'
 alias up-storage-redis='$STORAGE_COMMAND redis up -d'

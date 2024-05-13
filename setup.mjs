@@ -123,7 +123,7 @@ async function setupSymlink() {
 async function setupService() {
   echo("Setup service")
 
-  for (const dir of ["app", "ingress", "storage"])
+  for (const dir of ["app", "manager", "storage"])
     fs.cpSync(`service/${dir}/.env.example`, `service/${dir}/.env`, { force: false })
   echo(" -> Ok: created .env copies")
 
@@ -133,7 +133,7 @@ async function setupService() {
   await $`sudo docker network create dev`.nothrow()
   echo(" -> Ok: create network")
 
-  for (const vol of ["dev-app", "dev-ingress", "dev-storage"])
+  for (const vol of ["dev-app", "dev-manager", "dev-storage"])
     await $`sudo docker volume create ${vol}`.nothrow()
   echo(" -> Ok: create volume")
 }
