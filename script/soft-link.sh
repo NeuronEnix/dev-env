@@ -25,3 +25,12 @@ if [ -f "$source_file" ] && [ ! -L "$destination_file" ]; then
 else
   echo "  - ok: Exist: $destination_file"
 fi
+
+source_file="$HOME/dev-env/script/minify.js"
+destination_file="$HOME/adoc/minify.js"
+if [ -f "$source_file" ] && [ ! -L "$destination_file" ]; then
+  ln -s "$source_file" "$destination_file"
+  echo "  - ok: Created $destination_file"
+else
+  echo "  - ok: Exist: $destination_file"
+fi

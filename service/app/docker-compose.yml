@@ -82,8 +82,8 @@ services:
     volumes:
       - ./vol/jf/media:/media
       - ./vol/jf/media2:/media2:ro
-      # - /path/to/config:/config
-      # - /path/to/cache:/cache
+      - ./vol/jf/config:/config
+      - ./vol/jfcache:/cache
     networks:
       - net
     ports:
