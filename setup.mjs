@@ -5,17 +5,22 @@ $.verbose = false
 
 while (true) {
   echo("\nDevelopment Environment")
-  const option = "Setup, Install".split(", ")
+  const option = "Setup Environment, Install Default Pkg, Install Pkg".split(", ")
   option.forEach((opt, i) => echo(`${i + 1}. ${opt}`))
   const choice = await question('Choose: ')
   switch (option[parseInt(choice) - 1]) {
-    case "Setup": {
+    case "Setup Environment": {
       await setupToBashrc()
       await setupDefaultDirAndFile()
       await setupSymlink()
       await setupService()
     } break
-    case "Install": await installPackage(); break
+    case "Install Default Pkg": {
+      $.verbose = true
+      await $`sudo apt install -y curl wget build-essential`
+      $.verbose = false
+    } break
+    case "Install Pkg": await installPackage(); break
     default: echo("Incorrect option")
   }
 }
@@ -89,6 +94,10 @@ async function setupToBashrc() {
   echo(" -> Ok")
 }
 
+async function setupDefaultPkg() {
+
+}
+
 async function setupDefaultDirAndFile() {
   echo("Setup default dir")
 
@@ -112,8 +121,10 @@ async function setupSymlink() {
   await $`ln -s "${os.homedir()}/.bashrc" "symlink/.bashrc"`.nothrow()
   echo(" -> Ok: .bashrc")
 
-  await $`ln -s "${os.homedir()}/.ssh" "symlink/.ssh"`.nothrow()
-  echo(" -> Ok: .ssh")
+  if ( fs.existsSync("~/.ssh" ) ) {
+    await $`ln -s "${os.homedir()}/.ssh" "symlink/.ssh"`.nothrow()
+    echo(" -> Ok: .ssh")
+  } else echo(" -> warn: ~/.ssh dir not found")
 
   await $`ln -s "/etc/fstab" "symlink/fstab"`.nothrow()
   echo(" -> Ok: fstab")
