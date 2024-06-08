@@ -6,13 +6,13 @@ mkdir -p "$backup_dir"
 
 # Backup ~/dev-env
 cd ~/dev-env
-sudo zip -r "$backup_dir/dev-env.zip" .
+sudo zip -0r "$backup_dir/dev-env.zip" .
 
 # Backup ~/adoc
 cd ~/kms
-sudo zip -r "$backup_dir/kms.zip" .
+sudo zip -0r "$backup_dir/kms.zip" .
 
 # Backup ~/adoc
 cd ~/adoc
 node minify.js
-sudo zip -r "$backup_dir/adoc.zip" .
+sudo zip -0r "$backup_dir/adoc.zip" .
