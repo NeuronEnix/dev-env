@@ -4,17 +4,19 @@ MANAGER_COMMAND="$BASE_COMMAND/manager/docker-compose.yml --profile"
 STORAGE_COMMAND="$BASE_COMMAND/storage/docker-compose.yml --profile"
 
 alias up-app-all='$APP_COMMAND all up -d'
-alias up-app-chat='$APP_COMMAND open-webui up -d'
+alias up-app-chat='$APP_COMMAND chat up -d'
 alias up-app-ft='$APP_COMMAND ft up -d'
 alias up-app-actual='$APP_COMMAND actual up -d'
 alias up-app-i-spy='$APP_COMMAND i-spy up -d'
 alias up-app-jf='$APP_COMMAND jf up -d'
+alias up-app-s-pdf='$APP_COMMAND s-pdf up -d'
 alias down-app-all='$APP_COMMAND all down'
-alias down-app-chat='$APP_COMMAND open-webui down'
+alias down-app-chat='$APP_COMMAND chat down'
 alias down-app-ft='$APP_COMMAND ft down'
 alias down-app-actual='$APP_COMMAND actual down'
 alias down-app-i-spy='$APP_COMMAND i-spy down'
 alias down-app-jf='$APP_COMMAND jf down'
+alias down-app-s-pdf='$APP_COMMAND s-pdf down'
 
 alias up-manager-all='$MANAGER_COMMAND all up -d'
 alias up-manager-nginx='$MANAGER_COMMAND nginx-proxy up -d'

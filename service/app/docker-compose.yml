@@ -4,10 +4,10 @@ networks:
     external: true
 
 services:
-  open-webui:
+  chat:
     image: ${OPEN_WEBUI_IMAGE}
     container_name: ${COMPOSE_PROJECT_PREFIX}-open-webui
-    profiles: [all, open-webui ]
+    profiles: [all, chat ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
       - ./vol/open-webui:/app/backend/data
@@ -94,3 +94,20 @@ services:
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     # extra_hosts:
     #   - 'host.docker.internal:host-gateway'
+
+  s-pdf:
+    image: ${STIRLING_PDF_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-s-pdf
+    profiles: [all, s-pdf]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/s-pdf/trainingData:/usr/share/tesseract-ocr/5/tessdata #Required for extra OCR languages
+      - ./vol/s-pdf/extraConfigs:/configs
+      - ./vol/s-pdf/customFiles:/customFiles/
+      - ./vol/s-pdf/logs:/logs/
+    networks:
+      - net
+    ports:
+      - ${STIRLING_PDF_PORT}:8080
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
