@@ -121,13 +121,18 @@ async function setupSymlink() {
   await $`ln -s "${os.homedir()}/.bashrc" "symlink/.bashrc"`.nothrow()
   echo(" -> Ok: .bashrc")
 
-  if ( fs.existsSync("~/.ssh" ) ) {
+  if ( fs.existsSync(`${os.homedir()}/.ssh`) ) {
     await $`ln -s "${os.homedir()}/.ssh" "symlink/.ssh"`.nothrow()
     echo(" -> Ok: .ssh")
   } else echo(" -> warn: ~/.ssh dir not found")
 
   await $`ln -s "/etc/fstab" "symlink/fstab"`.nothrow()
   echo(" -> Ok: fstab")
+
+  if ( fs.existsSync(`${os.homedir()}/.local/state/syncthing` ) ) {
+    await $`ln -s "${os.homedir()}/.local/state/syncthing" "symlink/syncthing"`.nothrow()
+    echo(" -> Ok: syncthing")
+  } else echo(" -> warn: syncthing config not found")
 
 }
 
