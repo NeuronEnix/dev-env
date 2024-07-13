@@ -1,6 +1,7 @@
 {
+"type": "module",
   "scripts": {
-    "start": "zx setup.mjs"
+    "start": "node setup.mjs"
   },
   "dependencies": {
     "zx": "^7.2.3"
