@@ -17,7 +17,7 @@ while (true) {
     } break
     case "Install Default Pkg": {
       $.verbose = true
-      await $`sudo apt install -y curl wget build-essential`
+      await $`sudo apt install -y curl wget ffmpeg`
       $.verbose = false
     } break
     case "Install Pkg": await installPackage(); break
