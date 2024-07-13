@@ -2,7 +2,7 @@ const ts = new Date()
 
 export const config = {
   ts: ts,
-  backupDir: `${os.homedir()}/abkp/${os.hostname()}/${ts.toISOString().replaceAll(":", "-").replaceAll(".", "-")}`,
+  backupDir: `${os.homedir()}/abkp/${os.hostname()}__${ts.toISOString().split(".")[0].replaceAll(":", "-").replace("T", "__")}`,
   dir: [
     { path: `${os.homedir()}/dev-env`, backupAs: "dev-env.zip", copySymlinkOriginalData: true},
     { path: `${os.homedir()}/adoc/prj`, backupAs: "adoc-prj.zip" },

@@ -18,7 +18,7 @@ async function zipDir() {
 
     const zipFile = `${config.backupDir}/${dir.backupAs}`
     const zipConfig = ["-q", "-0r"]
-    if (dir.copySymlinkOriginalData == false) zipConfig.push("-y")
+    if (dir.copySymlinkOriginalData !== true) zipConfig.push("-y")
 
     await $`sudo zip ${zipConfig} ${zipFile} .`.quiet()
     echo(`BackedUp: ${(fs.statSync(zipFile).size / 1024 / 1024).toFixed(3)} MB`)
