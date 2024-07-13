@@ -126,6 +126,12 @@ async function setupSymlink() {
     echo(" -> Ok: .ssh")
   } else echo(" -> warn: ~/.ssh dir not found")
 
+  const sublimeSession = `${os.homedir()}/.config/sublime-text/Local`
+  if ( fs.existsSync(sublimeSession) ) {
+    await $`ln -s "${sublimeSession}" "symlink/sublimeAutoSave"`.nothrow()
+    echo(" -> Ok: sublimeAutoSave")
+  } else echo(" -> warn: sublimeAutoSave dir not found")
+
   if ( fs.existsSync(`${os.homedir()}/.local/state/syncthing` ) ) {
     await $`ln -s "${os.homedir()}/.local/state/syncthing" "symlink/syncthing"`.nothrow()
     echo(" -> Ok: syncthing")
