@@ -14,6 +14,7 @@ while (true) {
       await setupToBashrc()
       await setupDefaultDirAndFile()
       await setupSymlink()
+      await setupApp()
       await setupService()
     } break
     case "Install Default Pkg": {
@@ -136,8 +137,34 @@ async function setupSymlink() {
   }
 }
 
+async function setupApp() {
+  echo("\nSetup app")
+  for (const app of config.appList) {
+    if (!fs.existsSync(app.bin)) {
+      echo(` -> Ok: not exists -> ${app.name} binary`)
+      continue
+    }
+    if (app.systemctlScript) {
+      if (!fs.existsSync(`/etc/systemd/system/${app.name}.service`)) {
+        const serviceFile = fs.readFileSync(app.systemctlScript).toString().replaceAll("__USER__", os.userInfo().username)
+        fs.writeFileSync(`tmp/${app.name}.service`, serviceFile )
+        await $`sudo mv tmp/${app.name}.service /etc/systemd/system/${app.name}.service`
+        echo(` -> Ok: created -> /etc/systemd/system/${app.name}.service`)
+        await $`sudo systemctl daemon-reload`
+      } else echo(` -> Ok: exists -> /etc/systemd/system/${app.name}.service`)
+      if ( await $`sudo systemctl is-enabled ${app.name}`.exitCode != 0) {
+        await $`sudo systemctl enable ${app.name}`
+        echo(` -> Ok: systemctl enable -> ${app.name}`)
+      } else echo(` -> Ok: systemctl is-enabled -> ${app.name}`)
+      if ( await $`sudo systemctl is-active ${app.name}`.exitCode != 0) {
+        await $`sudo systemctl start ${app.name}`
+        echo(` -> Ok: systemctl start -> ${app.name}`)
+      } else echo(` -> Ok: systemctl is-active -> ${app.name}`)
+    }
+  }
+}
 async function setupService() {
-  echo("Setup service")
+  echo("\nSetup service")
 
   for (const dir of ["app", "manager", "storage"])
     fs.cpSync(`service/${dir}/.env.example`, `service/${dir}/.env`, { force: false })
