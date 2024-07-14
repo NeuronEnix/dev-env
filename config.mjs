@@ -9,21 +9,23 @@ export const config = {
   ],
 
   dirList: [
-    { path: `${os.homedir()}/dev-env`, backupAs: "dev-env" },
-    { path: `${os.homedir()}/kms`, backupAs: "kms" },
+    // { path: `${os.homedir()}/dev-env`, backupAs: "dev-env", restore: false },
+    { path: `${os.homedir()}/kms`, backupAs: "kms", restore: false },
 
-    { path: `${os.homedir()}/adoc/cld`, backupAs: "adoc-cld" },
-    { path: `${os.homedir()}/adoc/lfs`, backupAs: "adoc-lfs" },
-    { path: `${os.homedir()}/adoc/prj`, backupAs: "adoc-prj" },
-    { path: `${os.homedir()}/adoc/rad`, backupAs: "adoc-rad" },
-    { path: `${os.homedir()}/adoc/tmp`, backupAs: "adoc-tmp" },
+    { path: `${os.homedir()}/adoc/cld`, backupAs: "adoc-cld", restore: false },
+    // { path: `${os.homedir()}/adoc/lfs`, backupAs: "adoc-lfs", restore: false },
+    { path: `${os.homedir()}/adoc/prj`, backupAs: "adoc-prj", restore: false },
+    { path: `${os.homedir()}/adoc/rad`, backupAs: "adoc-rad", restore: false },
+    // { path: `${os.homedir()}/adoc/tmp`, backupAs: "adoc-tmp", restore: false },
   ],
 
   symlinkList: [
     { at: `${os.homedir()}/adoc/minify.cjs`, path: `${os.homedir()}/dev-env/script/minify.cjs` },
     { at: `${symlinkDir}/bashrc.sh`, path: `${os.homedir()}/.bashrc` },
+
+    { at: `${symlinkDir}/app`, backupAs: "sym-app", path: `${os.homedir()}/app`, restore: false },
     { at: `${symlinkDir}/ssh`, backupAs: "sym-ssh", path: `${os.homedir()}/.ssh` },
-    { at: `${symlinkDir}/sublimeAutoSave`, backupAs: "sym-sublimeAutoSave", path: `${os.homedir()}/.config/sublime-text/Local` },
-    { at: `${symlinkDir}/syncthing`, backupAs: "sym-syncthing", path: `${os.homedir()}/.local/state/syncthing` },
+    { at: `${symlinkDir}/sublime`, backupAs: "sym-sublime", path: `${os.homedir()}/.config/sublime-text/Local` },
+    { at: `${symlinkDir}/syncthing`, backupAs: "sym-syncthing", path: `${os.homedir()}/.local/state/syncthing`, restore: false },
   ]
 }

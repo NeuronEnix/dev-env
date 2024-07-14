@@ -2,13 +2,17 @@
 
 import 'zx/globals'
 import { config } from './config.mjs'
-$.verbose = false
-const baseDir = `${os.homedir()}/dev-env`
-echo("Timestamp: " + config.ts)
 
+const baseDir = `${os.homedir()}/dev-env`
+$.verbose = false
+
+echo("Timestamp: " + config.ts)
+echo("\nBackup Dir: " + config.backupDir);
+fs.mkdirSync(config.backupDir, { recursive: true })
 
 await minify()
 await zipDir()
+await createRestoreFile()
 
 async function minify() {
   console.log("\nMinifying...")
@@ -19,8 +23,7 @@ async function minify() {
 }
 
 async function zipDir() {
-  echo("\nBackup Dir: " + config.backupDir);
-  fs.mkdirSync(config.backupDir, { recursive: true })
+  echo("\Zipping...")
 
   for (const zipData of [...config.dirList, ...config.symlinkList]) {
     if (!zipData.backupAs || !zipData.path) continue
@@ -39,4 +42,21 @@ async function zipDir() {
     $`sudo chmod 664 ${zipFileName}`.quiet()
   }
   cd(baseDir)
+}
+
+async function createRestoreFile() {
+  echo("\nCreate Restore File")
+  const lines = ["#!/bin/bash", "set -e\n"]
+  // lines.push("sudo apt update")
+  // lines.push("sudo apt install -y curl wget unzip")
+
+  lines.push("\n# Restore Items")
+  for ( const item of [...config.dirList, ...config.symlinkList] ) {
+    if ( !item.backupAs ) continue
+    lines.push(
+      `${item.restore === false ? "# " : ""}mkdir -p ${item.path} && unzip -qn ${item.backupAs}.zip -d ${item.path}`
+    )
+  }
+  fs.writeFileSync( `${config.backupDir}/restore.sh`, lines.join("\n") )
+  await $`chmod 774 ${config.backupDir}/restore.sh`.quiet()
 }
