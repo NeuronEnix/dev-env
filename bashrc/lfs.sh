@@ -1,26 +1,27 @@
 alias lfs='create_lfs_folder'
 
 create_lfs_folder() {
-    # Get the current directory path
-    current_path=$(pwd)
+  current_dir=$(pwd)
+  base_dir="$HOME/adoc"
 
-    # Construct paths for the lfs folder and symlink
-    lfs_folder="$HOME/lfs${current_path#$HOME}"
-    lfs_link="$current_path/lfs"
+  # Check if the current directory is within ~/adoc but not within ~/adoc/lfs
+  if [[ "$current_dir" == "$base_dir"* && "$current_dir" != "$base_dir" && "$current_dir" != "$base_dir/lfs"* ]]; then
+    # Get the relative path from ~/adoc to the current directory
+    relative_path=${current_dir#$base_dir/}
 
-    # Check if the current directory is within $HOME/lfs or its subdirectories
-    if [[ "$current_path" =~ ^$HOME/lfs ]]; then
-        echo "Error: Already in $HOME/lfs or its subdirectories."
-        return 1
-    fi
+    lfs_folder="$base_dir/lfs/$relative_path/lfs"
+    lfs_link="$current_dir/lfs"
 
-    # Check and create the folder if it does not exist
+    # Create the folder dir
     mkdir -p "$lfs_folder" && echo "Created Folder: $lfs_folder"
 
-    # Check and create the symlink if it does not exist
+    # Create symlink if not exist
     if [ ! -L "$lfs_link" ]; then
-        ln -s "$lfs_folder" "$lfs_link"
+      ln -sr "$lfs_folder" "$lfs_link" && echo "Created Symlink: $lfs_link -> $lfs_folder"
+    else
+      echo "Symlink already exists: $lfs_link"
     fi
-    echo "Created Symlink: $lfs_link"
-
+  else
+    echo "lfs: can only be used within the '$base_dir/...' directory"
+  fi
 }
