@@ -1,6 +1,7 @@
 #!/usr/bin/env zx
 
 import 'zx/globals'
+import { config } from './config.mjs'
 $.verbose = false
 
 while (true) {
@@ -99,44 +100,40 @@ async function setupDefaultPkg() {
 }
 
 async function setupDefaultDirAndFile() {
-  echo("Setup default dir")
-
-  const adocDirs = ['prj', 'cld/aws', 'cld/gcp', 'cld/az', 'rad', 'tmp']
-  for (const dir of adocDirs) {
-    fs.mkdirSync(`${os.homedir()}/adoc/${dir}`, { recursive: true })
+  echo("\nSetup default dir")
+  for (const dir of config.dirList) {
+    if (!fs.existsSync(dir.path)) {
+      fs.mkdirSync(dir.path, { recursive: true })
+      echo(` -> Ok: created -> ${dir.path}`)
+    } else {
+      echo(` -> Ok: exists -> ${dir.path}`)
+    }
   }
-  echo(` -> Ok: ${adocDirs.join(" | ")}`)
 
-  fs.mkdirSync(`${os.homedir()}/kms/general`, { recursive: true })
-  echo(` -> Ok: kms/general`)
-
-  await $`touch bashrc/_custom.sh`
-  echo(` -> Ok: bashrc/_custom.sh`)
+  echo("\nSetup default file")
+  for (const file of config.file) {
+    if (!fs.existsSync(file.path)) {
+      fs.writeFileSync(file.path, file.content)
+      echo(` -> Ok: created -> ${file.path}`)
+    } else {
+      echo(` -> Ok: exists -> ${file.path}`)
+    }
+  }
 }
 
 async function setupSymlink() {
-  echo("Setup symlink")
-  fs.mkdirSync(`./symlink`, { recursive: true })
+  echo("\nSetup symlink")
+  if (!fs.existsSync(config.symlinkDir))
+    fs.mkdirSync(config.symlinkDir, { recursive: true })
 
-  await $`ln -s "${os.homedir()}/.bashrc" "symlink/.bashrc"`.nothrow()
-  echo(" -> Ok: .bashrc")
-
-  if ( fs.existsSync(`${os.homedir()}/.ssh`) ) {
-    await $`ln -s "${os.homedir()}/.ssh" "symlink/.ssh"`.nothrow()
-    echo(" -> Ok: .ssh")
-  } else echo(" -> warn: ~/.ssh dir not found")
-
-  const sublimeSession = `${os.homedir()}/.config/sublime-text/Local`
-  if ( fs.existsSync(sublimeSession) ) {
-    await $`ln -s "${sublimeSession}" "symlink/sublimeAutoSave"`.nothrow()
-    echo(" -> Ok: sublimeAutoSave")
-  } else echo(" -> warn: sublimeAutoSave dir not found")
-
-  if ( fs.existsSync(`${os.homedir()}/.local/state/syncthing` ) ) {
-    await $`ln -s "${os.homedir()}/.local/state/syncthing" "symlink/syncthing"`.nothrow()
-    echo(" -> Ok: syncthing")
-  } else echo(" -> warn: syncthing config not found")
-
+  for (const symlink of config.symlinkList) {
+    if (!fs.existsSync(`${config.symlinkDir}/${symlink.as}`)) {
+      fs.symlinkSync(symlink.path, `${config.symlinkDir}/${symlink.as}`)
+      echo(` -> Ok: created -> ${symlink.as}`)
+    } else {
+      echo(` -> Ok: exists -> ${symlink.as}`)
+    }
+  }
 }
 
 async function setupService() {
