@@ -8,23 +8,24 @@ echo("Timestamp: " + config.ts)
 await zipDir()
 
 async function zipDir() {
-  echo("Backup Dir: " + config.backupDir)
-
+  echo("Backup Dir: " + config.backupDir);
   fs.mkdirSync(config.backupDir, { recursive: true })
 
-  for (const dir of config.dir) {
-    cd(dir.path)
-    echo(`\nBackup: ${dir.backupAs} (${dir.path})`)
+  for (const zipData of [...config.dirList, ...config.symlinkList]) {
+    if (!zipData.backupAs || !zipData.path) continue
 
-    const zipFile = `${config.backupDir}/${dir.backupAs}`
-    const zipConfig = ["-q", "-0r"]
-    if (dir.copySymlinkOriginalData !== true) zipConfig.push("-y")
+    echo(`\nBackup: ${zipData.backupAs} (${zipData.path})`)
+    cd(zipData.path)
 
-    await $`sudo zip ${zipConfig} ${zipFile} .`.quiet()
-    echo(`BackedUp: ${(fs.statSync(zipFile).size / 1024 / 1024).toFixed(3)} MB`)
+    const zipFileName = `${config.backupDir}/${zipData.backupAs}.zip`
+    const zipFlag = ["-q", "-0r", "-y"]
+    await $`sudo zip ${zipFlag} ${zipFileName} .`.quiet()
+
+    echo(`BackedUp: ${(fs.statSync(zipFileName).size / 1024 / 1024).toFixed(3)} MB`)
 
     // Change permission
-    $`sudo chown $USER:$USER ${zipFile}`.quiet()
-    $`sudo chmod 664 ${zipFile}`.quiet()
+    $`sudo chown $USER:$USER ${zipFileName}`.quiet()
+    $`sudo chmod 664 ${zipFileName}`.quiet()
   }
+  cd(`${os.homedir()}/dev-env`)
 }
