@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const [,, ...args] = process.argv;
+const argDir = args[0];
 
 const isMinifyProjectDirectory = ( curPath="" ) => curPath === __dirname;
 const isNodeProjectDirectory = ( fileNameList=[], dirNameList=[] ) => fileNameList.includes( "package.json" ) && dirNameList.includes( "node_modules" );
@@ -21,15 +23,15 @@ function delNodeModules( curPath ) {
     }
     dirNameList.splice( dirNameList.indexOf( "node_modules" ), 1 );
   }
-    
+
 // console.log( dirNameList )
   for ( const eachDirName of dirNameList ){
     const nextPath = path.join( curPath, eachDirName );
     delNodeModules( nextPath );
 
   }
-  
-  
+
+
 }
 
-delNodeModules( __dirname );
+delNodeModules( argDir || __dirname );

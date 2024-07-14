@@ -3,12 +3,23 @@
 import 'zx/globals'
 import { config } from './config.mjs'
 $.verbose = false
+const baseDir = `${os.homedir()}/dev-env`
 echo("Timestamp: " + config.ts)
 
+
+await minify()
 await zipDir()
 
+async function minify() {
+  console.log("\nMinifying...")
+  $.verbose = true
+  await $`node ${os.homedir()}/adoc/minify.cjs ${os.homedir()}/adoc`
+  $.verbose = false
+  console.log("Minified!")
+}
+
 async function zipDir() {
-  echo("Backup Dir: " + config.backupDir);
+  echo("\nBackup Dir: " + config.backupDir);
   fs.mkdirSync(config.backupDir, { recursive: true })
 
   for (const zipData of [...config.dirList, ...config.symlinkList]) {
@@ -27,5 +38,5 @@ async function zipDir() {
     $`sudo chown $USER:$USER ${zipFileName}`.quiet()
     $`sudo chmod 664 ${zipFileName}`.quiet()
   }
-  cd(`${os.homedir()}/dev-env`)
+  cd(baseDir)
 }
