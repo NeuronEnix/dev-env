@@ -29,11 +29,21 @@ async function zipDir() {
     if (!zipData.backupAs || !zipData.path) continue
 
     echo(`\nBackup: ${zipData.backupAs} (${zipData.path})`)
+    if ( zipData.systemctlStop ) {
+      await $`sudo systemctl stop ${zipData.systemctlStop}`
+      echo(`ok: systemctl stop -> ${zipData.systemctlStop}`)
+    }
+
     cd(zipData.path)
 
     const zipFileName = `${config.backupDir}/${zipData.backupAs}.zip`
     const zipFlag = ["-q", "-0r", "-y"]
     await $`sudo zip ${zipFlag} ${zipFileName} .`.quiet()
+
+    if ( zipData.systemctlStop ) {
+      await $`sudo systemctl start ${zipData.systemctlStop}`
+      echo(`ok: systemctl start -> ${zipData.systemctlStop}`)
+    }
 
     echo(`BackedUp: ${(fs.statSync(zipFileName).size / 1024 / 1024).toFixed(3)} MB`)
 

@@ -12,20 +12,53 @@ export const config = {
     // { path: `${os.homedir()}/dev-env`, backupAs: "dev-env", restore: false },
     { path: `${os.homedir()}/kms`, backupAs: "kms", restore: false },
 
-    { path: `${os.homedir()}/adoc/cld`, backupAs: "adoc-cld", restore: false },
+    { path: `${os.homedir()}/adoc/cld`, backupAs: "adoc-cld", restore: true },
     // { path: `${os.homedir()}/adoc/lfs`, backupAs: "adoc-lfs", restore: false },
     { path: `${os.homedir()}/adoc/prj`, backupAs: "adoc-prj", restore: false },
-    { path: `${os.homedir()}/adoc/rad`, backupAs: "adoc-rad", restore: false },
+    { path: `${os.homedir()}/adoc/rad`, backupAs: "adoc-rad", restore: true },
     // { path: `${os.homedir()}/adoc/tmp`, backupAs: "adoc-tmp", restore: false },
   ],
 
   symlinkList: [
-    { at: `${os.homedir()}/adoc/minify.cjs`, path: `${os.homedir()}/dev-env/script/minify.cjs` },
-    { at: `${symlinkDir}/bashrc.sh`, path: `${os.homedir()}/.bashrc` },
+    {
+      at: `${os.homedir()}/adoc/minify.cjs`,
+      path: `${os.homedir()}/dev-env/script/minify.cjs`
+    },
+    {
+      at: `${symlinkDir}/bashrc.sh`,
+      path: `${os.homedir()}/.bashrc`
+    },
 
-    { at: `${symlinkDir}/app`, backupAs: "sym-app", path: `${os.homedir()}/app`, restore: false },
-    { at: `${symlinkDir}/ssh`, backupAs: "sym-ssh", path: `${os.homedir()}/.ssh` },
-    { at: `${symlinkDir}/sublime`, backupAs: "sym-sublime", path: `${os.homedir()}/.config/sublime-text/Local` },
-    { at: `${symlinkDir}/syncthing`, backupAs: "sym-syncthing", path: `${os.homedir()}/.local/state/syncthing`, restore: false },
+    {
+      at: `${symlinkDir}/app`,
+      backupAs: "sym-app",
+      path: `${os.homedir()}/app`,
+      restore: false
+    },
+    {
+      at: `${symlinkDir}/ssh`,
+      backupAs: "sym-ssh",
+      path: `${os.homedir()}/.ssh`
+    },
+    {
+      at: `${symlinkDir}/sublime`,
+      backupAs: "sym-sublime",
+      path: `${os.homedir()}/.config/sublime-text/Local`
+    },
+    {
+      at: `${symlinkDir}/syncthing`,
+      backupAs: "sym-syncthing",
+      restore: false,
+      systemctlStop: "syncthing",
+      path: `${os.homedir()}/.local/state/syncthing`,
+    },
+  ],
+
+  appList: [
+    {
+      name: "syncthing",
+      bin: `${os.homedir()}/app/syncthing/syncthing`,
+      systemctlScript: `${os.homedir()}/dev-env/script/systemctl/syncthing.sh`
+    },
   ]
 }
