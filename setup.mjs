@@ -127,11 +127,11 @@ async function setupSymlink() {
     fs.mkdirSync(config.symlinkDir, { recursive: true })
 
   for (const symlink of config.symlinkList) {
-    if (!fs.existsSync(`${config.symlinkDir}/${symlink.as}`)) {
-      fs.symlinkSync(symlink.path, `${config.symlinkDir}/${symlink.as}`)
-      echo(` -> Ok: created -> ${symlink.as}`)
+    if (!fs.existsSync(symlink.at)) {
+      fs.symlinkSync(symlink.path, symlink.at)
+      echo(` -> Ok: created -> ${symlink.at}`)
     } else {
-      echo(` -> Ok: exists -> ${symlink.as}`)
+      echo(` -> Ok: exists -> ${symlink.at}`)
     }
   }
 }
