@@ -10,14 +10,14 @@ export const config = {
   ],
 
   dirList: [
-    // { path: `${os.homedir()}/dev-env`, backupAs: "dev-env", restore: false },
-    { path: `${os.homedir()}/kms`, backupAs: "kms", restore: false },
+    { path: `${os.homedir()}/dev-env`, backupAs: "dev-env", restore: true },
+    { path: `${os.homedir()}/kms`, backupAs: "kms", restore: true },
 
     { path: `${os.homedir()}/adoc/cld`, backupAs: "adoc-cld", restore: true },
-    // { path: `${os.homedir()}/adoc/lfs`, backupAs: "adoc-lfs", restore: false },
+    { path: `${os.homedir()}/adoc/lfs`, backupAs: "adoc-lfs", restore: true },
     { path: `${os.homedir()}/adoc/prj`, backupAs: "adoc-prj", restore: false },
     { path: `${os.homedir()}/adoc/rad`, backupAs: "adoc-rad", restore: true },
-    // { path: `${os.homedir()}/adoc/tmp`, backupAs: "adoc-tmp", restore: false },
+    { path: `${os.homedir()}/adoc/tmp`, backupAs: "adoc-tmp", restore: true },
   ],
 
   symlinkList: [
@@ -26,22 +26,20 @@ export const config = {
 
     {
       at: `${symlinkDir}/app`, path: `${os.homedir()}/app`,
-      backupAs: "sym-app", restore: false
+      backupAs: "sym-app", restore: true,
     },
     {
       at: `${symlinkDir}/ssh`, path: `${os.homedir()}/.ssh`,
-      backupAs: "sym-ssh",
-
+      backupAs: "sym-ssh", restore: true,
     },
     {
       at: `${symlinkDir}/sublime`, path: `${os.homedir()}/.config/sublime-text/Local`,
-      backupAs: "sym-sublime",
+      backupAs: "sym-sublime", restore: true,
     },
     {
       at: `${symlinkDir}/syncthing`, path: `${os.homedir()}/.local/state/syncthing`,
-      backupAs: "sym-syncthing", restore: false,
+      backupAs: "sym-syncthing", restore: true,
       systemctlStop: "syncthing",
-
     },
   ],
 

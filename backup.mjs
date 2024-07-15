@@ -64,7 +64,7 @@ async function createRestoreFile() {
   for ( const item of [...config.dirList, ...config.symlinkList] ) {
     if ( !item.backupAs ) continue
     lines.push(
-      `${item.restore === false ? "# " : ""}mkdir -p ${item.path} && unzip -qn ${item.backupAs}.zip -d ${item.path}`
+      `${item.restore === true ? "" : "# "}mkdir -p ${item.path} && unzip -qn ${item.backupAs}.zip -d ${item.path}`
     )
   }
   fs.writeFileSync( `${config.backupDir}/restore.sh`, lines.join("\n") )
