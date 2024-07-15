@@ -8,3 +8,4 @@ symlink
 symlink.old
 bashrc/_custom.sh
 node_modules
+tmp
