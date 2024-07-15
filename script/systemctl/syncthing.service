@@ -5,7 +5,7 @@ After=network.target
 
 [Service]
 User=__USER__
-ExecStart=/home/__USER__/app/syncthing/syncthing -no-browser -gui-address=0.0.0.0:8384
+ExecStart=/home/__USER__/app/syncthing/syncthing serve --no-browser --no-restart --logflags=0
 Restart=on-failure
 RestartSec=5
 StartLimitInterval=60s
