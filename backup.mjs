@@ -6,13 +6,17 @@ import { config } from './config.mjs'
 const baseDir = `${os.homedir()}/dev-env`
 $.verbose = false
 
-echo("Timestamp: " + config.ts)
-echo("\nBackup Dir: " + config.backupDir);
 fs.mkdirSync(config.backupDir, { recursive: true })
 
 await minify()
-await zipDir()
+const { totalZipCount, totalZipSize } = await zipDir()
 await createRestoreFile()
+
+echo("")
+echo("Timestamp: " + config.ts)
+echo("Backup Dir: " + config.backupDir)
+echo(`Total Zip Count: ${totalZipCount}\nTotal Zip Size: ${(totalZipSize / 1024 / 1024 / 1024).toFixed(3)} GB`)
+
 
 async function minify() {
   console.log("\nMinifying...")
@@ -24,7 +28,7 @@ async function minify() {
 
 async function zipDir() {
   echo("\Zipping...")
-
+  let totalZipCount = 0, totalZipSize = 0
   for (const zipData of [...config.dirList, ...config.symlinkList]) {
     if (!zipData.backupAs || !zipData.path) continue
 
@@ -45,6 +49,8 @@ async function zipDir() {
       echo(`ok: systemctl start -> ${zipData.systemctlStop}`)
     }
 
+    totalZipCount++
+    totalZipSize += fs.statSync(zipFileName).size
     echo(`BackedUp: ${(fs.statSync(zipFileName).size / 1024 / 1024).toFixed(3)} MB`)
 
     // Change permission
@@ -52,10 +58,11 @@ async function zipDir() {
     $`sudo chmod 664 ${zipFileName}`.quiet()
   }
   cd(baseDir)
+  return { totalZipCount, totalZipSize }
 }
 
 async function createRestoreFile() {
-  echo("\nCreate Restore File")
+  const restoreFile = `${config.backupDir}/restore.sh`
   const lines = ["#!/bin/bash", "set -e\n"]
   // lines.push("sudo apt update")
   // lines.push("sudo apt install -y curl wget unzip")
@@ -67,6 +74,9 @@ async function createRestoreFile() {
       `${item.restore === true ? "" : "# "}mkdir -p ${item.path} && unzip -qn ${item.backupAs}.zip -d ${item.path}`
     )
   }
-  fs.writeFileSync( `${config.backupDir}/restore.sh`, lines.join("\n") )
-  await $`chmod 774 ${config.backupDir}/restore.sh`.quiet()
+  fs.writeFileSync( restoreFile, lines.join("\n") )
+  await $`chmod 774 ${restoreFile}`.quiet()
+  echo("\nCreated Restore File: " + restoreFile)
+
+  return restoreFile
 }
