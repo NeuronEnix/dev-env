@@ -10,19 +10,20 @@ Development Environment
 Using `asdf`
 - Source: https://asdf-vm.com/guide/getting-started.html
 ``` sh
+
 # Dependency
 apt install curl git
 
 # Download asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
-```
-- Past in  `.bashrc`:
-``` sh
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
-```
-- Install node using asdf
-```sh
+
+# add to ~/.bashrc
+echo "# asdf install" >> ~/.bashrc
+echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
+echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+source ~/.bashrc
+
+# Install node using asdf
 asdf plugin-add nodejs
 asdf install nodejs 20.15.1
 asdf global nodejs 20.15.1
