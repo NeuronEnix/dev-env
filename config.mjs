@@ -11,13 +11,19 @@ export const config = {
 
   dirList: [
     { path: `${os.homedir()}/dev-env`, backupAs: "dev-env", restore: true },
-    { path: `${os.homedir()}/kms`, backupAs: "kms", restore: true },
+    { path: `${os.homedir()}/kms`, create: true, backupAs: "kms", restore: true },
 
-    { path: `${os.homedir()}/adoc/cld`, backupAs: "adoc-cld", restore: true },
-    { path: `${os.homedir()}/adoc/lfs`, backupAs: "adoc-lfs", restore: true },
-    { path: `${os.homedir()}/adoc/prj`, backupAs: "adoc-prj", restore: false },
-    { path: `${os.homedir()}/adoc/rad`, backupAs: "adoc-rad", restore: true },
-    { path: `${os.homedir()}/adoc/tmp`, backupAs: "adoc-tmp", restore: true },
+    { path: `${os.homedir()}/adoc/cld`, create: true, backupAs: "adoc-cld", restore: true },
+    { path: `${os.homedir()}/adoc/lfs`, create: true, backupAs: "adoc-lfs", restore: true },
+    { path: `${os.homedir()}/adoc/prj`, create: true, backupAs: "adoc-prj", restore: false },
+    { path: `${os.homedir()}/adoc/rad`, create: true, backupAs: "adoc-rad", restore: true },
+    { path: `${os.homedir()}/adoc/tmp`, create: true, backupAs: "adoc-tmp", restore: true },
+
+    { path: `${os.homedir()}/Downloads`, backupAs: "Downloads", restore: true },
+    { path: `${os.homedir()}/.config/google-chrome`, backupAs: "config-google-chrome", restore: true },
+    // { path: `${os.homedir()}/Documents`, backupAs: "Documents", restore: true },
+    // { path: `${os.homedir()}/Pictures`, backupAs: "Pictures", restore: true },
+    // { path: `${os.homedir()}/Videos`, backupAs: "Videos", restore: true },
   ],
 
   symlinkList: [

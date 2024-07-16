@@ -3,7 +3,7 @@
 import 'zx/globals'
 import { config } from './config.mjs'
 
-await $`sudo apt update`;
+// await $`sudo apt update`;
 $.verbose = false
 
 while (true) {
@@ -14,7 +14,7 @@ while (true) {
   switch (config.setupOption[parseInt(choice) - 1]) {
     case "Setup Environment": {
       await setupToBashrc()
-      await setupDefaultDirAndFile()
+      await setupDirAndFile()
       await setupSymlink()
       await setupService()
     } break
@@ -24,7 +24,10 @@ while (true) {
       await $`sudo apt install -y ${config.defaultPkg}`
       echo(` -> Ok: installed -> ${config.defaultPkg.join(", ")}`)
     } break
-    case "Install Apps": await listApp(); break
+    case "Install Apps": {
+      await listApp(); 
+      echo("Restart pc if apps are not showing up")
+    } break
     default: echo("Incorrect option")
   }
 }
@@ -40,10 +43,10 @@ async function setupToBashrc() {
   echo(" -> Ok")
 }
 
-async function setupDefaultDirAndFile() {
+async function setupDirAndFile() {
   echo("\nSetup default dir")
   for (const dir of config.dirList) {
-    if (!fs.existsSync(dir.path)) {
+    if (dir.create === true && !fs.existsSync(dir.path)) {
       fs.mkdirSync(dir.path, { recursive: true })
       echo(` -> Ok: created -> ${dir.path}`)
     } else {
@@ -144,7 +147,7 @@ async function installApp(app) {
 
 async function setupSystemCtl(app) {
   echo(`  - systemctl`)
-
+  const { systemctl } = app
   // Create systemd service if not exist
   if (await $`ls /etc/systemd/system/${systemctl.name}.service`.exitCode != 0) {
     const serviceFile = fs.readFileSync(systemctl.script).toString().replaceAll("__USER__", os.userInfo().username)
@@ -152,17 +155,18 @@ async function setupSystemCtl(app) {
     await $`sudo mv ${systemctl.name}.service /etc/systemd/system/${systemctl.name}.service`
     echo(`    Ok: created -> ${systemctl.name}.service`)
     await $`sudo systemctl daemon-reload`
+    echo(`    Ok: daemon-reload`)
   } else echo(`    Ok: exists -> ${systemctl.name}.service`)
 
   // Try to start service
   if (await $`sudo systemctl is-enabled ${systemctl.name}`.exitCode != 0) {
     await $`sudo systemctl enable ${systemctl.name}`
-    echo(`    Ok: enabled`)
-  } else echo(`    Ok: is-enabled`)
+    echo(`    Ok: enabled -> ${systemctl.name}.service`)
+  } else echo(`    Ok: is-enabled -> ${systemctl.name}.service`)
 
   // Try to start service
   if (await $`sudo systemctl is-active ${systemctl.name}`.exitCode != 0) {
     await $`sudo systemctl start ${systemctl.name}`
-    echo(`    Ok: started`)
-  } else echo(`    Ok: is-active`)
+    echo(`    Ok: started -> ${systemctl.name}.service`)
+  } else echo(`    Ok: is-active -> ${systemctl.name}.service`)
 }
