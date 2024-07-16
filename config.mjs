@@ -58,6 +58,10 @@ export const config = {
       install: { from: "snap", pkg: ["postman"] },
     },
     {
+      name: "Restfox", bin: "/snap/bin/restfox",
+      install: { from: "snap", pkg: ["restfox"] },
+    },
+    {
       name: "Slack", bin: "/snap/bin/slack",
       install: { from: "snap", pkg: ["slack"] },
     },
@@ -81,7 +85,7 @@ export const config = {
     },
     {
       name: "Flatpak", bin: "/usr/bin/flatpak",
-      install: { from: "file", path: `${os.homedir()}/script/multiline-install-script/flatpak.sh` },
+      install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/flatpak.sh` },
     },
     {
       name: "Google Chrome", bin: "/usr/bin/google-chrome",

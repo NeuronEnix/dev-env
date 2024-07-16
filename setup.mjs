@@ -2,8 +2,9 @@
 
 import 'zx/globals'
 import { config } from './config.mjs'
+
+await $`sudo apt update`;
 $.verbose = false
-$`sudo apt update`;
 
 while (true) {
   echo("\nDevelopment Environment")
