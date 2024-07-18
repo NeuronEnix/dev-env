@@ -1,0 +1,7 @@
+{
+	"name": "terraform-iac",
+	"remoteUser": "vscode",
+	"dockerFile": "Dockerfile",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/code,type=bind",
+	"postCreateCommand": "bash -i ./.devcontainer/setup.sh" // optional
+}

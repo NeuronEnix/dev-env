@@ -1,0 +1,7 @@
+alias tf='terraform'
+  alias tfi='tf init'
+  alias tfp='tf plan'
+  alias tfa='tf apply'
+    alias tfaa='tf apply -auto-approve'
+  alias tfd='tf destroy'
+  alias tff='tf fmt --recursive'
