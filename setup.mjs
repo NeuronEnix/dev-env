@@ -3,7 +3,6 @@
 import 'zx/globals'
 import { config } from './config.mjs'
 
-// await $`sudo apt update`;
 $.verbose = false
 
 while (true) {
@@ -12,6 +11,7 @@ while (true) {
   const choice = await question('Choose: ')
 
   switch (config.setupOption[parseInt(choice) - 1]) {
+    case "Apt Update": await $`sudo apt update`; break
     case "Setup Environment": {
       await setupToBashrc()
       await setupDirAndFile()
@@ -25,8 +25,8 @@ while (true) {
       echo(` -> Ok: installed -> ${config.defaultPkg.join(", ")}`)
     } break
     case "Install Apps": {
-      await listApp(); 
-      echo("Restart pc if apps are not showing up")
+      await listApp();
+      echo("\n -> Restart pc if apps are not showing up")
     } break
     default: echo("Incorrect option")
   }

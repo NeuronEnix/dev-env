@@ -3,7 +3,7 @@ const backupDir = `${os.homedir()}/abkp/${os.hostname()}__${ts.toISOString().spl
 const symlinkDir = `${os.homedir()}/dev-env/symlink`
 export const config = {
   ts, backupDir, symlinkDir,
-  setupOption: ["Setup Environment", "Install Default Pkg", "Install Apps"],
+  setupOption: ["Apt Update","Setup Environment", "Install Default Pkg", "Install Apps"],
   defaultPkg: ["curl", "wget", "ffmpeg", "unzip"],
   file: [
     { path: `${os.homedir()}/dev-env/bashrc/_custom.sh` },
@@ -18,6 +18,7 @@ export const config = {
     { path: `${os.homedir()}/adoc/prj`, create: true, backupAs: "adoc-prj", restore: false },
     { path: `${os.homedir()}/adoc/rad`, create: true, backupAs: "adoc-rad", restore: true },
     { path: `${os.homedir()}/adoc/tmp`, create: true, backupAs: "adoc-tmp", restore: true },
+    { path: `${os.homedir()}/adoc/data`, create: true, backupAs: "adoc-data", restore: true },
 
     { path: `${os.homedir()}/Downloads`, backupAs: "Downloads", restore: true },
     { path: `${os.homedir()}/.config/google-chrome`, backupAs: "config-google-chrome", restore: true },
