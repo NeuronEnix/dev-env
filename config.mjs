@@ -13,12 +13,12 @@ export const config = {
     { path: `${os.homedir()}/dev-env`, backupAs: "dev-env", restore: true },
     { path: `${os.homedir()}/kms`, create: true, backupAs: "kms", restore: true },
 
-    { path: `${os.homedir()}/adoc/cld`, create: true, backupAs: "adoc-cld", restore: true },
-    { path: `${os.homedir()}/adoc/lfs`, create: true, backupAs: "adoc-lfs", restore: true },
-    { path: `${os.homedir()}/adoc/prj`, create: true, backupAs: "adoc-prj", restore: false },
-    { path: `${os.homedir()}/adoc/rad`, create: true, backupAs: "adoc-rad", restore: true },
-    { path: `${os.homedir()}/adoc/tmp`, create: true, backupAs: "adoc-tmp", restore: true },
-    { path: `${os.homedir()}/adoc/data`, create: true, backupAs: "adoc-data", restore: true },
+    { path: `${os.homedir()}/adoc/cld`, create: true, backupAs: "adoc/cld", restore: true },
+    { path: `${os.homedir()}/adoc/lfs`, create: true, backupAs: "adoc/lfs", restore: true },
+    { path: `${os.homedir()}/adoc/prj`, create: true, backupAs: "adoc/prj", restore: false },
+    { path: `${os.homedir()}/adoc/rad`, create: true, backupAs: "adoc/rad", restore: true },
+    { path: `${os.homedir()}/adoc/tmp`, create: true, backupAs: "adoc/tmp", restore: true },
+    { path: `${os.homedir()}/adoc/data`, create: true, backupAs: "adoc/data", restore: true },
 
     { path: `${os.homedir()}/Downloads`, backupAs: "Downloads", restore: true },
     { path: `${os.homedir()}/.config/google-chrome`, backupAs: "config-google-chrome", restore: true },

@@ -7,6 +7,7 @@ const baseDir = `${os.homedir()}/dev-env`
 $.verbose = false
 
 fs.mkdirSync(config.backupDir, { recursive: true })
+fs.mkdirSync(`${config.backupDir}/adoc`, { recursive: true })
 fs.mkdirSync(`${config.backupDir}/flatpak`, { recursive: true })
 
 await minify()
