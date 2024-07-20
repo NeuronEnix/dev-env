@@ -138,6 +138,10 @@ async function installApp(app) {
       await $`sudo snap install ${app.install.pkg}`
       break
     }
+    case "flatpak": {
+      await $`flatpak install flathub -y ${app.install.pkg}`
+      break
+    }
     case "file": {
       await $`sh ${app.install.path}`
       break

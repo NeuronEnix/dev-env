@@ -7,6 +7,7 @@ const baseDir = `${os.homedir()}/dev-env`
 $.verbose = false
 
 fs.mkdirSync(config.backupDir, { recursive: true })
+fs.mkdirSync(`${config.backupDir}/flatpak`, { recursive: true })
 
 await minify()
 const { totalZipCount, totalZipSize } = await zipDir()
@@ -29,7 +30,7 @@ async function minify() {
 async function zipDir() {
   echo("\Zipping...")
   let totalZipCount = 0, totalZipSize = 0
-  for (const zipData of [...config.dirList, ...config.symlinkList]) {
+  for (const zipData of [...config.dirList, ...config.symlinkList, ...config.appList]) {
     if (!zipData.backupAs || !zipData.path) continue
 
     echo(`\nBackup: ${zipData.backupAs} (${zipData.path})`)
@@ -68,7 +69,7 @@ async function createRestoreFile() {
   // lines.push("sudo apt install -y curl wget unzip")
 
   lines.push("\n# Restore Items")
-  for ( const item of [...config.dirList, ...config.symlinkList] ) {
+  for ( const item of [...config.dirList, ...config.symlinkList, ...config.appList] ) {
     if ( !item.backupAs ) continue
     lines.push(
       `${item.restore === true ? "" : "# "}mkdir -p ${item.path} && unzip -qn ${item.backupAs}.zip -d ${item.path}`

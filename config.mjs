@@ -80,7 +80,12 @@ export const config = {
       name: "VS Code", bin: "/snap/bin/code",
       install: { from: "snap", pkg: ["code", "--classic"] },
     },
-
+    {
+      name: "OBS Studio", bin: "/var/lib/flatpak/exports/share/applications/com.obsproject.Studio.desktop",
+      install: { from: "flatpak", pkg: ["com.obsproject.Studio"] },
+      path: `${os.homedir()}/.var/app/com.obsproject.Studio`,
+      backupAs: "flatpak/obs-studio", restore: true
+    },
     // From File
     {
       name: "AWS Cli", bin: "/usr/local/bin/aws",
