@@ -1,5 +1,5 @@
 # https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
-version = 1.30
+version=1.30
 
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
 
