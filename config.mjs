@@ -4,7 +4,7 @@ const symlinkDir = `${os.homedir()}/dev-env/symlink`
 export const config = {
   ts, backupDir, symlinkDir,
   setupOption: ["Apt Update","Setup Environment", "Install Default Pkg", "Install Apps"],
-  defaultPkg: ["curl", "wget", "ffmpeg", "unzip"],
+  defaultPkg: ["curl", "wget", "ffmpeg", "unzip", "openssh-server", "git"],
   file: [
     { path: `${os.homedir()}/dev-env/bashrc/_custom.sh` },
   ],
