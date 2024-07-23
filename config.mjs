@@ -81,6 +81,10 @@ export const config = {
       install: { from: "snap", pkg: ["code", "--classic"] },
     },
     {
+      name: "VLC", bin: "/snap/bin/vlc",
+      install: { from: "snap", pkg: ["vlc"] },
+    },
+    {
       name: "OBS Studio", bin: "/var/lib/flatpak/exports/share/applications/com.obsproject.Studio.desktop",
       install: { from: "flatpak", pkg: ["com.obsproject.Studio"] },
       path: `${os.homedir()}/.var/app/com.obsproject.Studio`,
