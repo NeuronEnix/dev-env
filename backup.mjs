@@ -38,6 +38,10 @@ async function zipDir() {
     if ( zipData.systemctlStop ) {
       await $`sudo systemctl stop ${zipData.systemctlStop}`
       echo(`ok: systemctl stop -> ${zipData.systemctlStop}`)
+
+      echo("Wait for 2 seconds...")
+      await sleep(2000)
+
     }
 
     cd(zipData.path)
