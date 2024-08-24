@@ -13,6 +13,7 @@ export const config = {
     { path: `${os.homedir()}/dev-env`, backupAs: "dev-env", restore: true },
     { path: `${os.homedir()}/kms`, create: true, backupAs: "kms", restore: true },
 
+    { path: `${os.homedir()}/adoc/dataset`, create: true, backupAs: "adoc/dataset", restore: true },
     { path: `${os.homedir()}/adoc/cld`, create: true, backupAs: "adoc/cld", restore: true },
     { path: `${os.homedir()}/adoc/lfs`, create: true, backupAs: "adoc/lfs", restore: true },
     { path: `${os.homedir()}/adoc/prj`, create: true, backupAs: "adoc/prj", restore: false },
