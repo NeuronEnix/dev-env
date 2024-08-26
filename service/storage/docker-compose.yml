@@ -34,8 +34,9 @@ services:
     profiles: [ all, mysql ]
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/mysql:/var/lib/mysql
+      # - ./vol/mysql:/var/lib/mysql
       # - ./setup/mysql.sql:/docker-entrypoint-initdb.d/1.sql
+      - mysql:/var/lib/mysql
     networks:
       - net
     ports:
@@ -120,6 +121,21 @@ services:
     environment:
       - ADMINER_UPLOAD_LIMIT=1G
 
+  pgadmin:
+    image: ${PGADMIN_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-pgadmin
+    profiles: [ all, psql ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    ports:
+      - ${PGADMIN_PORT}:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}  # replace with your admin email
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD} # replace with your admin password
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
   couchdb:
     image: ${COUCH_DB_IMAGE}
     container_name: ${COMPOSE_PROJECT_PREFIX}-couchdb
@@ -134,3 +150,8 @@ services:
     environment:
       COUCHDB_USER: ${COUCH_DB_USER}
       COUCHDB_PASSWORD: ${COUCH_DB_PASSWORD}
+volumes:
+  mysql:
+    name: dev-mysql
+  pgadmin:
+    name: dev-pgadmin
