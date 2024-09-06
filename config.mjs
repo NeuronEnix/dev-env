@@ -6,7 +6,7 @@ export const config = {
   setupOption: ["Apt Update","Setup Environment", "Install Default Pkg", "Install Apps"],
   defaultPkg: ["curl", "wget", "ffmpeg", "unzip", "openssh-server", "git"],
   file: [
-    { path: `${os.homedir()}/dev-env/bashrc/_custom.sh` },
+    { path: `${os.homedir()}/dev-env/bashrc/_custom.sh`, content: "" },
   ],
 
   dirList: [
