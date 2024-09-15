@@ -124,7 +124,7 @@ services:
   pgadmin:
     image: ${PGADMIN_IMAGE}
     container_name: ${COMPOSE_PROJECT_PREFIX}-pgadmin
-    profiles: [ all, psql ]
+    profiles: [ all, pgadmin ]
     restart: ${COMPOSE_RESTART_POLICY}
     networks:
       - net
