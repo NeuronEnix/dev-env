@@ -12,6 +12,7 @@ services:
     volumes:
       - ./vol/nginx-proxy/data:/data
       - ./vol/nginx-proxy/letsencrypt:/etc/letsencrypt
+      - ../../public:/var/www/html:ro
     networks:
       - net
     extra_hosts:
@@ -60,3 +61,17 @@ services:
       - net
     ports:
       - ${UPTIME_KUMA_PORT}:3001
+
+  syncthing:
+    image: ${SYNCTHING_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-syncthing
+    profiles: [ all, syncthing ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/syncthing:/var/syncthing
+    networks:
+      - net
+    ports:
+      - ${SYNCTHING_PORT}:8384  # Web UI
+      - 22000:22000  # TCP file transfers
+      - 21027:21027/udp  # UDP discovery
