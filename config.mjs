@@ -41,6 +41,14 @@ export const config = {
       backupAs: "sym-ssh", restore: true,
     },
     {
+      at: `${symlinkDir}/kube`, path: `${os.homedir()}/.kube`,
+      backupAs: "sym-kube", restore: true,
+    },
+    {
+      at: `${symlinkDir}/aws`, path: `${os.homedir()}/.aws`,
+      backupAs: "sym-aws", restore: true,
+    },
+    {
       at: `${symlinkDir}/sublime`, path: `${os.homedir()}/.config/sublime-text/Local`,
       backupAs: "sym-sublime", restore: true,
     },
