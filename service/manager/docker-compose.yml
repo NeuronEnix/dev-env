@@ -14,10 +14,13 @@ services:
       - ./vol/nginx-proxy/letsencrypt:/etc/letsencrypt
     networks:
       - net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - 80:80
       - ${NGINX_PROXY_DASHBOARD_PORT}:81
       - 443:443
+      # - '21:21' # FTP
 
   portainer:
     image: ${PORTAINER_IMAGE}
