@@ -11,10 +11,10 @@ source ~/.bashrc
 # asdf plugin-add golang
 # asdf list golang
 # asdf list all golang
-# asdf install  golang 1.23.0
+# asdf install  golang 1.24.4
 
 # Set version for the project, which creates a file called .tool-versions in the project directory
-# asdf local golang 1.23.0
+# asdf local golang 1.24.4
 
 # Set golang version globally
-# asdf global golang 1.23.0
+# asdf global golang 1.24.4
