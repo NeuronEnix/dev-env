@@ -150,6 +150,45 @@ services:
     environment:
       COUCHDB_USER: ${COUCH_DB_USER}
       COUCHDB_PASSWORD: ${COUCH_DB_PASSWORD}
+
+  clickhouse:
+    image: ${CLICKHOUSE_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-clickhouse
+    profiles: [ all, clickhouse ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/clickhouse:/var/lib/clickhouse
+    networks:
+      - net
+    ports:
+      - 8123:8123
+      - 9000:9000
+    environment:
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB}
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 4G
+    #       cpus: 2
+
+  clickhouse-client:
+    image: ghcr.io/caioricciuti/ch-ui:latest  # Using the ClickHouse UI client image here
+    container_name: ${COMPOSE_PROJECT_PREFIX}-clickhouse-client
+    profiles: [ all, clickhouse ]
+    networks:
+      - net
+    ports:
+      - 5521:5521
+    # environment:
+      # VITE_CLICKHOUSE_URL: http://dev-clickhose:8123  # Adjust based on network if needed
+      # VITE_CLICKHOUSE_URL: http://dev-clickhose:9000  # Adjust based on network if needed
+      # VITE_CLICKHOUSE_USER: root
+      # VITE_CLICKHOUSE_PASS: pass123
+
+
+
 volumes:
   mysql:
     name: dev-mysql
