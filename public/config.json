@@ -1,0 +1,12 @@
+{
+  "services": [
+    {
+      "name": "Open Web UI",
+      "port": "32001"
+    },
+    {
+      "name": "File Tray",
+      "port": "32002"
+    }
+  ]
+}

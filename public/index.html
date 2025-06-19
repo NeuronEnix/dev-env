@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .link-item {
+            margin: 10px 0;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        h1 a {
+            color: inherit;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        .host-manager {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .host-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .host-input input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .host-input button {
+            padding: 8px 15px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .host-input button:hover {
+            background-color: #0052a3;
+        }
+        .host-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .url-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1><a href="/" target="_blank">Route App</a></h1>
+
+    <div class="host-manager">
+        <div class="host-input">
+            <input type="text" id="hostInput" placeholder="Enter host (e.g., dev-proxy.kaushik.com)">
+            <button onclick="addHost()">Add Host</button>
+        </div>
+        <div class="host-list" id="hostList">
+            <!-- Host checkboxes will be added here -->
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody id="serviceTable">
+            <!-- Service URLs will be added here -->
+        </tbody>
+    </table>
+
+    <script>
+        let services = [];
+
+        // Fetch services from config.json
+        async function fetchServices() {
+            try {
+                const response = await fetch('config.json');
+                const data = await response.json();
+                services = data.services;
+                renderServices();
+            } catch (error) {
+                console.error('Error loading services:', error);
+            }
+        }
+
+        // Initialize hosts in localStorage if not exists
+        if (!localStorage.getItem('hosts')) {
+            localStorage.setItem('hosts', JSON.stringify([
+                { host: 'localhost', checked: true, locked: true }
+            ]));
+        }
+
+        function getHosts() {
+            return JSON.parse(localStorage.getItem('hosts'));
+        }
+
+        function saveHosts(hosts) {
+            localStorage.setItem('hosts', JSON.stringify(hosts));
+        }
+
+        function addHost() {
+            const input = document.getElementById('hostInput');
+            const host = input.value.trim();
+
+            if (!host) return;
+
+            const hosts = getHosts();
+            if (!hosts.some(h => h.host === host)) {
+                hosts.push({ host, checked: true, locked: false });
+                saveHosts(hosts);
+                input.value = '';
+                renderHosts();
+                renderServices();
+            }
+        }
+
+        function toggleHost(host) {
+            const hosts = getHosts();
+            const hostItem = hosts.find(h => h.host === host);
+            if (hostItem && !hostItem.locked) {
+                hostItem.checked = !hostItem.checked;
+                saveHosts(hosts);
+                renderServices();
+            }
+        }
+
+        function renderHosts() {
+            const hostList = document.getElementById('hostList');
+            const hosts = getHosts();
+
+            hostList.innerHTML = hosts.map(({ host, checked, locked }) => `
+                <label>
+                    <input type="checkbox"
+                           ${checked ? 'checked' : ''}
+                           ${locked ? 'disabled' : ''}
+                           onchange="toggleHost('${host}')">
+                    ${host}
+                </label>
+            `).join('');
+        }
+
+        function renderServices() {
+            const serviceTable = document.getElementById('serviceTable');
+            const hosts = getHosts().filter(h => h.checked);
+
+            serviceTable.innerHTML = services.map(service => `
+                <tr>
+                    <td>${service.name}</td>
+                    <td class="url-cell">
+                        ${hosts.map(({ host }) => `
+                            <a href="http://${host}:${service.port}" target="_blank">
+                                http://${host}:${service.port}
+                            </a>
+                        `).join('')}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Initial render
+        renderHosts();
+        fetchServices(); // Fetch services from config.json
+    </script>
+</body>
+</html>
