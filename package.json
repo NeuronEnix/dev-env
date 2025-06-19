@@ -2,6 +2,7 @@
 "type": "module",
   "scripts": {
     "start": "node setup.mjs",
+    "bk": "node backup.mjs",
     "backup": "node backup.mjs"
   },
   "dependencies": {
