@@ -143,7 +143,9 @@ async function installApp(app) {
       break
     }
     case "file": {
+      if (app.install.verbose) $.verbose = true
       await $`sh ${app.install.path}`
+      $.verbose = false
       break
     }
   }

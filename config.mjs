@@ -135,6 +135,11 @@ export const config = {
         name: "syncthing",
         script: `${os.homedir()}/dev-env/script/systemctl/syncthing.service`
       }
-    },
+      },
+      {
+        name: "pnpm",
+        bin: `${os.homedir()}/.local/share/pnpm/pnpm`,
+        install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/pnpm.sh`, verbose: true },
+      },
   ]
 }
