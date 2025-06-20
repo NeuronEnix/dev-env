@@ -2,10 +2,15 @@
 
 import 'zx/globals'
 import { config } from './config.mjs'
+// import dotenv from 'dotenv'
+// const envConfig = JSON.parse(fs.readFileSync('./env.config.json', 'utf8'))
 
 $.verbose = false
 
 while (true) {
+  // console.log(getEnvContent(`${os.homedir()}/dev-env/service/app/.env`))
+  // console.log(envConfig)
+
   echo("\nDevelopment Environment")
   config.setupOption.forEach((opt, i) => echo(`${i + 1}. ${opt}`))
   const choice = await question('Choose: ')
@@ -175,4 +180,10 @@ async function setupSystemCtl(app) {
     await $`sudo systemctl start ${systemctl.name}`
     echo(`    Ok: started -> ${systemctl.name}.service`)
   } else echo(`    Ok: is-active -> ${systemctl.name}.service`)
+}
+
+function getEnvContent(path) {
+  const env = {}
+  dotenv.config({ path, processEnv: env })
+  return env
 }
