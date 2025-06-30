@@ -75,3 +75,15 @@ services:
       - ${SYNCTHING_PORT}:8384  # Web UI
       - 22000:22000  # TCP file transfers
       - 21027:21027/udp  # UDP discovery
+
+  watchtower:
+    image: ${WATCHTOWER_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-watchtower
+    profiles: [ all, watchtower ]
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net
+    ports:
+      - ${WATCHTOWER_PORT}:8080
