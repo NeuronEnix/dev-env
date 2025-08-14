@@ -1,4 +1,8 @@
 # Dev-Env
+# Install
+```sh
+curl -fsSL https://raw.githubusercontent.com/NeuronEnix/dev-env/main/init.sh | bash
+```
 
 Development Environment
 0. Source: https://github.com/nvm-sh/nvm
@@ -27,4 +31,8 @@ source ~/.bashrc
 asdf plugin-add nodejs
 asdf install nodejs 20.15.1
 asdf global nodejs 20.15.1
+```
+# To Test
+```sh
+sudo docker run -it ubuntu bash -c "apt update && apt install -y sudo && useradd -m -s /bin/bash -G sudo me && echo 'me ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && su - me"
 ```
