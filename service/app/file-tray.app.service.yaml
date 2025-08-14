@@ -1,0 +1,12 @@
+services:
+  file-tray:
+    image: ${FILE_TRAY_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-file-tray
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    ports:
+      - ${FILE_TRAY_PORT}:80
+    environment:
+      PORT: 80

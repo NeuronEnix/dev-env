@@ -1,0 +1,22 @@
+services:
+  maybe:
+    image: ${MAYBE_FINANCE_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-maybe
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/maybe/storage:/rails/storage
+    networks:
+      - net
+    ports:
+      - ${MAYBE_FINANCE_PORT}:3000
+    environment:
+      SELF_HOSTING_ENABLED: "true"
+      RAILS_FORCE_SSL: "false"
+      RAILS_ASSUME_SSL: "false"
+      GOOD_JOB_EXECUTION_MODE: async
+      SECRET_KEY_BASE: ${MAYBE_FINANCE_SECRET_KEY_BASE}
+      DB_HOST: ${MAYBE_FINANCE_POSTGRES_HOST}
+      POSTGRES_DB: ${MAYBE_FINANCE_POSTGRES_DB}
+      POSTGRES_USER: ${MAYBE_FINANCE_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${MAYBE_FINANCE_POSTGRES_PASS}

@@ -1,0 +1,21 @@
+services:
+  i-spy:
+    image: ${i_SPY_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-i-spy
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/actual:/data
+      - ./vol/i-spy/config/:/AgentDVR/Media/XML/
+      - ./vol/i-spy/media/:/AgentDVR/Media/WebServerRoot/Media/
+      - ./vol/i-spy/commands:/AgentDVR/Commands/
+    networks:
+      - net
+    ports:
+      - "${I_SPY_PORT}:8090"
+      - "3478:3478/udp"
+      - "50000-50010:50000-50010/udp"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Kolkata
