@@ -1,5 +1,4 @@
 sudo apt update
-sudo apt upgrade -y
 sudo apt install -y curl git wget unzip zip
 
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
