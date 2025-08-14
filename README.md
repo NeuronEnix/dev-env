@@ -1,43 +1,48 @@
 # Dev-Env
 
-# Install
+# Init
 ```sh
 sudo apt update
-sudo apt install -y curl
-```
-```sh
-curl -fsSL https://init.kaushikrb.com | bash
-```
+sudo apt install -y curl git wget unzip zip
 
-Development Environment
-0. Source: https://github.com/nvm-sh/nvm
-1. Install `nvm`: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
-2. Use `.nvmrc`: `nvm install` | `nvm use`
-3. Install dependency: `npm i`
-4. Run: `npm start`
-
-Using `asdf`
-- Source: https://asdf-vm.com/guide/getting-started.html
-``` sh
-
-# Dependency
-apt install curl git
-
-# Download asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 
-# add to ~/.bashrc
-echo "# asdf install" >> ~/.bashrc
-echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
-echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
-source ~/.bashrc
+# add it if # asdf install not exist in ~/.bashrc
+if ! grep -q "# asdf install" ~/.bashrc; then
+  echo "# asdf install" >> ~/.bashrc
+  echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
+  echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+fi
+
+source ~/.bashrc 
 
 # Install node using asdf
 asdf plugin-add nodejs
-asdf install nodejs 20.15.1
-asdf global nodejs 20.15.1
+asdf install nodejs 22.18.0
+asdf global nodejs 22.18.0
+
+asdf plugin-add golang
+asdf install golang 1.25.0
+asdf global golang 1.25.0
+
+npm install -g pnpm@latest-10
+
+echo
+echo
+echo "Node Version: $(node -v)"
+echo "Golang Version: $(go version)"
+echo "PNPM Version: $(pnpm -v)"
+
+cd ~
+if [ ! -d "dev-env" ]; then
+  git clone https://github.com/NeuronEnix/dev-env.git
+fi
+cd ~/dev-env
+
+npm ci
+npm run start
 ```
-# To Test
+# Test Docker
 ```sh
 sudo docker run -it ubuntu bash -c "apt update && apt install -y sudo && useradd -m -s /bin/bash -G sudo me && echo 'me ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && su - me"
 ```
