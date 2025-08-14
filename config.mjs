@@ -109,6 +109,10 @@ export const config = {
       install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/docker.sh` },
     },
     {
+      name: "Docker Rootless", bin: "/usr/bin/docker",
+      install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/docker.rootless.sh` },
+    },
+    {
       name: "Flatpak", bin: "/usr/bin/flatpak",
       install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/flatpak.sh` },
     },
@@ -135,11 +139,11 @@ export const config = {
         name: "syncthing",
         script: `${os.homedir()}/dev-env/script/systemctl/syncthing.service`
       }
-      },
-      {
-        name: "pnpm",
-        bin: `${os.homedir()}/.local/share/pnpm/pnpm`,
-        install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/pnpm.sh`, verbose: true },
-      },
+    },
+    {
+      name: "pnpm",
+      bin: `${os.homedir()}/.local/share/pnpm/pnpm`,
+      install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/pnpm.sh`, verbose: true },
+    },
   ]
 }
