@@ -3,9 +3,13 @@ sudo apt install -y curl git wget unzip zip
 
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 
-echo "# asdf install" >> ~/.bashrc
-echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
-echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+# add it if # asdf install not exist in ~/.bashrc
+if ! grep -q "# asdf install" ~/.bashrc; then
+  echo "# asdf install" >> ~/.bashrc
+  echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
+  echo ". $HOME/.asdf/completions/asdf.bash" >> ~/.bashrc
+fi
+
 source ~/.bashrc 
 
 # Install node using asdf
