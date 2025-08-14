@@ -1,5 +1,10 @@
 # Dev-Env
+
 # Install
+```sh
+sudo apt update
+sudo apt install -y curl
+```
 ```sh
 curl -fsSL https://raw.githubusercontent.com/NeuronEnix/dev-env/main/init.sh | bash
 ```
