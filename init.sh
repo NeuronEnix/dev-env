@@ -1,6 +1,6 @@
 sudo apt update
 sudo apt upgrade -y
-sudo apt install -y curl git wget ffmpeg unzip zip 
+sudo apt install -y curl git wget unzip zip
 
 cd ~
 if [ ! -d "dev-env" ]; then
