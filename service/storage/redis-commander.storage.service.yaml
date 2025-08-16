@@ -1,0 +1,12 @@
+services:
+  redis-commander:
+    image: ${REDIS_COMMANDER_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-redis-commander
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    environment:
+    - REDIS_HOSTS=local-db-0:redis:6379:0
+    ports:
+    - ${REDIS_COMMANDER_PORT}:8081

@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: ${MYSQL_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-mysql
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      # - ./vol/mysql:/var/lib/mysql
+      # - ./setup/mysql.sql:/docker-entrypoint-initdb.d/1.sql
+      - mysql:/var/lib/mysql
+    networks:
+      - net
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    # gives executable permission to run the init script
+    # command: bash -c "chmod +x /docker-entrypoint-initdb.d/1.sql && docker-entrypoint.sh mysqld"

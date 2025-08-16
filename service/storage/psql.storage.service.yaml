@@ -1,0 +1,16 @@
+services:
+  psql:
+    image: ${POSTGRES_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-psql
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/psql:/var/lib/postgresql/data
+    networks:
+      - net
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}

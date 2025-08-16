@@ -1,0 +1,14 @@
+services:
+  portainer:
+    image: ${PORTAINER_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-portainer
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+        - ./vol/portainer:/data
+        - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net
+    ports:
+      - ${PORTAINER_HTTPS_PORT}:9443
+      # - ${PORTAINER_HTTP_PORT}:8000

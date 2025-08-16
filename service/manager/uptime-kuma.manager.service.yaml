@@ -1,0 +1,12 @@
+services:
+  uptime-kuma:
+    image: ${UPTIME_KUMA_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-uptime-kuma
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/uptime-kuma:/app/data
+    networks:
+      - net
+    ports:
+      - ${UPTIME_KUMA_PORT}:3001

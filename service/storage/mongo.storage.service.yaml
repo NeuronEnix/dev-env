@@ -1,0 +1,15 @@
+services:
+  mongo:
+    image: ${MONGO_DB_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-mongo
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/mongo:/data/db
+    networks:
+      - net
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}

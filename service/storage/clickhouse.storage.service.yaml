@@ -1,0 +1,22 @@
+services:
+  clickhouse:
+    image: ${CLICKHOUSE_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-clickhouse
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/clickhouse:/var/lib/clickhouse
+    networks:
+      - net
+    ports:
+      - 8123:8123
+      - 9000:9000
+    environment:
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB}
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 4G
+    #       cpus: 2

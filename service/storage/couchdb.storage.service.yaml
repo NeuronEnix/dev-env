@@ -1,0 +1,15 @@
+services:
+  couchdb:
+    image: ${COUCH_DB_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-couchdb
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/couchdb:/opt/couchdb/data
+    networks:
+      - net
+    ports:
+      - 5984:5984
+    environment:
+      COUCHDB_USER: ${COUCH_DB_USER}
+      COUCHDB_PASSWORD: ${COUCH_DB_PASSWORD}

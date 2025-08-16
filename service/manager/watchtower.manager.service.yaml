@@ -1,0 +1,12 @@
+services:
+  watchtower:
+    image: ${WATCHTOWER_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-watchtower
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net
+    ports:
+      - ${WATCHTOWER_PORT}:8080

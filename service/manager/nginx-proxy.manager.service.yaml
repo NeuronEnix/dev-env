@@ -1,0 +1,19 @@
+services:
+  nginx-proxy:
+    image: ${NGINX_PROXY_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-nginx-proxy
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/nginx-proxy/data:/data
+      - ./vol/nginx-proxy/letsencrypt:/etc/letsencrypt
+      - ../../public:/var/www/html:ro
+    networks:
+      - net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 80:80
+      - ${NGINX_PROXY_DASHBOARD_PORT}:81
+      - 443:443
+      # - '21:21' # FTP

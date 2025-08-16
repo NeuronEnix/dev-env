@@ -1,0 +1,12 @@
+services:
+  redis:
+    image: ${REDIS_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-redis
+    
+    restart: ${COMPOSE_RESTART_POLICY}
+    volumes:
+      - ./vol/redis:/data
+    networks:
+      - net
+    ports:
+      - 6379:6379
