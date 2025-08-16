@@ -145,5 +145,10 @@ export const config = {
       bin: `${os.homedir()}/.local/share/pnpm/pnpm`,
       install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/pnpm.sh`, verbose: true },
     },
+
+    {
+      name: "Tailscale", bin: "/usr/bin/tailscale",
+      install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/tailscale.sh` },
+    },
   ]
 }
