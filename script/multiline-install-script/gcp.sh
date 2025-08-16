@@ -2,8 +2,13 @@
 
 curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
 tar -xf google-cloud-cli-linux-x86_64.tar.gz
-./google-cloud-sdk/install.sh
-./google-cloud-sdk/bin/gcloud init
+
+# Move to home directory
+mv google-cloud-sdk ~/google-cloud-sdk
+
+# Install and initialize
+~/google-cloud-sdk/install.sh
+~/google-cloud-sdk/bin/gcloud init
 
 # install components if needed
 # https://cloud.google.com/sdk/docs/components
@@ -12,3 +17,6 @@ gcloud components list
 
 # update sdk
 # gcloud components update
+
+
+rm -rf google-cloud-cli-linux-x86_64.tar.gz

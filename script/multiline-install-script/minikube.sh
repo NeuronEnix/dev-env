@@ -3,3 +3,9 @@
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
 sudo dpkg -i minikube_latest_amd64.deb
 rm -rf minikube_latest_amd64.deb
+
+# # With gcloud
+# gcloud components install minikube
+# gcloud components remove minikube
+# gcloud components update
+# gcloud components list
