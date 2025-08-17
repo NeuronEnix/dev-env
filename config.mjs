@@ -145,7 +145,10 @@ export const config = {
       bin: `${os.homedir()}/.local/share/pnpm/pnpm`,
       install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/pnpm.sh`, verbose: true },
     },
-
+    {
+      name: "Github CLI", bin: "/usr/bin/gh",
+      install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/gh.sh` },
+    },
     {
       name: "Tailscale", bin: "/usr/bin/tailscale",
       install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/tailscale.sh` },
