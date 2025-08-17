@@ -5,7 +5,7 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/redis:/data
+      - ../vol/redis:/data
     networks:
       - net
     ports:

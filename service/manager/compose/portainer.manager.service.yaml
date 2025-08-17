@@ -5,7 +5,7 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-        - ./vol/portainer:/data
+        - ../vol/portainer:/data
         - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - net

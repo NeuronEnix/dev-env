@@ -1,10 +1,10 @@
 include:
-  - nginx-proxy.manager.service.yaml
-  - portainer.manager.service.yaml
-  - portainer-agent.manager.service.yaml
-  - uptime-kuma.manager.service.yaml
-  - syncthing.manager.service.yaml
-  - watchtower.manager.service.yaml
+  - compose/nginx-proxy.manager.service.yaml
+  - compose/portainer.manager.service.yaml
+  - compose/portainer-agent.manager.service.yaml
+  - compose/uptime-kuma.manager.service.yaml
+  - compose/syncthing.manager.service.yaml
+  - compose/watchtower.manager.service.yaml
 
 networks:
   net:

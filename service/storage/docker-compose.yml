@@ -1,17 +1,17 @@
 include:
-  - redis.storage.service.yaml
-  - redis-commander.storage.service.yaml
-  - mysql.storage.service.yaml
-  - phpmyadmin.storage.service.yaml
-  - mongo.storage.service.yaml
-  - mongo-express.storage.service.yaml
-  - psql.storage.service.yaml
-  - adminer.storage.service.yaml
-  - pgadmin.storage.service.yaml
-  - couchdb.storage.service.yaml
-  - clickhouse.storage.service.yaml
-  - clickhouse-client.storage.service.yaml
-  - hasura.storage.service.yaml
+  - compose/redis.storage.service.yaml
+  - compose/redis-commander.storage.service.yaml
+  - compose/mysql.storage.service.yaml
+  - compose/phpmyadmin.storage.service.yaml
+  - compose/mongo.storage.service.yaml
+  - compose/mongo-express.storage.service.yaml
+  - compose/psql.storage.service.yaml
+  - compose/adminer.storage.service.yaml
+  - compose/pgadmin.storage.service.yaml
+  - compose/couchdb.storage.service.yaml
+  - compose/clickhouse.storage.service.yaml
+  - compose/clickhouse-client.storage.service.yaml
+  - compose/hasura.storage.service.yaml
 
 networks:
   net:

@@ -5,7 +5,7 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/uptime-kuma:/app/data
+      - ../vol/uptime-kuma:/app/data
     networks:
       - net
     ports:

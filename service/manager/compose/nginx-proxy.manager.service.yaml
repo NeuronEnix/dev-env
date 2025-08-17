@@ -5,8 +5,8 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/nginx-proxy/data:/data
-      - ./vol/nginx-proxy/letsencrypt:/etc/letsencrypt
+      - ../vol/nginx-proxy/data:/data
+      - ../vol/nginx-proxy/letsencrypt:/etc/letsencrypt
       - ../../public:/var/www/html:ro
     networks:
       - net

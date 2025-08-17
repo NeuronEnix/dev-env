@@ -5,7 +5,7 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/syncthing:/var/syncthing
+      - ../vol/syncthing:/var/syncthing
     networks:
       - net
     ports:
