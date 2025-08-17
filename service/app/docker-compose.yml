@@ -1,11 +1,11 @@
 include:
-  - chat.app.service.yaml
-  - file-tray.app.service.yaml
-  - actual.app.service.yaml
-  - i-spy.app.service.yaml
-  - jellyfin.app.service.yaml
-  - s-pdf.app.service.yaml
-  - maybe.app.service.yaml
+  - compose/chat.app.service.yaml
+  - compose/file-tray.app.service.yaml
+  - compose/actual.app.service.yaml
+  - compose/i-spy.app.service.yaml
+  - compose/jellyfin.app.service.yaml
+  - compose/s-pdf.app.service.yaml
+  - compose/maybe.app.service.yaml
 
 networks:
   net:

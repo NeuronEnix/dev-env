@@ -5,10 +5,10 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/s-pdf/trainingData:/usr/share/tesseract-ocr/5/tessdata #Required for extra OCR languages
-      - ./vol/s-pdf/extraConfigs:/configs
-      - ./vol/s-pdf/customFiles:/customFiles/
-      - ./vol/s-pdf/logs:/logs/
+      - ../vol/s-pdf/trainingData:/usr/share/tesseract-ocr/5/tessdata #Required for extra OCR languages
+      - ../vol/s-pdf/extraConfigs:/configs
+      - ../vol/s-pdf/customFiles:/customFiles/
+      - ../vol/s-pdf/logs:/logs/
     networks:
       - net
     ports:

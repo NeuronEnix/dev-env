@@ -5,10 +5,10 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/actual:/data
-      - ./vol/i-spy/config/:/AgentDVR/Media/XML/
-      - ./vol/i-spy/media/:/AgentDVR/Media/WebServerRoot/Media/
-      - ./vol/i-spy/commands:/AgentDVR/Commands/
+      - ../vol/actual:/data
+      - ../vol/i-spy/config/:/AgentDVR/Media/XML/
+      - ../vol/i-spy/media/:/AgentDVR/Media/WebServerRoot/Media/
+      - ../vol/i-spy/commands:/AgentDVR/Commands/
     networks:
       - net
     ports:

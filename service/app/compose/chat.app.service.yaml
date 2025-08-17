@@ -5,7 +5,7 @@ services:
     
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
-      - ./vol/open-webui:/app/backend/data
+      - ../vol/open-webui:/app/backend/data
     networks:
       - net
     ports:

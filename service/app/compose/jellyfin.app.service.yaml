@@ -7,10 +7,10 @@ services:
     # user: uid:gid
     # network_mode: 'host'
     volumes:
-      - ./vol/jf/media:/media
-      - ./vol/jf/media2:/media2:ro
-      - ./vol/jf/config:/config
-      - ./vol/jfcache:/cache
+      - ../vol/jf/media:/media
+      - ../vol/jf/media2:/media2:ro
+      - ../vol/jf/config:/config
+      - ../vol/jfcache:/cache
     networks:
       - net
     ports:
