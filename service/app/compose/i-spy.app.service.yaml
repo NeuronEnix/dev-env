@@ -1,8 +1,8 @@
 services:
   i-spy:
-    image: ${i_SPY_IMAGE}
+    image: ${I_SPY_IMAGE}
     container_name: ${COMPOSE_PROJECT_PREFIX}-i-spy
-    
+
     restart: ${COMPOSE_RESTART_POLICY}
     volumes:
       - ../vol/actual:/data

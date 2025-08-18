@@ -3,6 +3,9 @@
 import 'zx/globals'
 import { config } from './config.mjs'
 import { setupToBashrc } from './setup/bashrc.mjs'
+import { setupDirAndFile } from './setup/dir-file.mjs'
+import { setupSymlink } from './setup/symlink.mjs'
+import { setupService } from './setup/service.mjs'
 // import dotenv from 'dotenv'
 // const envConfig = JSON.parse(fs.readFileSync('./env.config.json', 'utf8'))
 
@@ -39,63 +42,6 @@ while (true) {
 }
 
 
-async function setupDirAndFile() {
-  echo("\nSetup default dir")
-  for (const dir of config.dirList) {
-    if (dir.create === true && !fs.existsSync(dir.path)) {
-      fs.mkdirSync(dir.path, { recursive: true })
-      echo(` -> Ok: created -> ${dir.path}`)
-    } else {
-      echo(` -> Ok: exists -> ${dir.path}`)
-    }
-  }
-
-  echo("\nSetup default file")
-  for (const file of config.file) {
-    if (!fs.existsSync(file.path)) {
-      fs.writeFileSync(file.path, file.content)
-      echo(` -> Ok: created -> ${file.path}`)
-    } else {
-      echo(` -> Ok: exists -> ${file.path}`)
-    }
-  }
-}
-
-async function setupSymlink() {
-  echo("\nSetup symlink")
-  if (!fs.existsSync(config.symlinkDir))
-    fs.mkdirSync(config.symlinkDir, { recursive: true })
-
-  for (const symlink of config.symlinkList) {
-    if (!fs.existsSync(symlink.at)) {
-      if (!fs.existsSync(symlink.path) ) {
-        echo(` -> Ok: (not found) -> ${symlink.path}`)
-      } else {
-        fs.symlinkSync(symlink.path, symlink.at)
-        echo(` -> Ok: created -> ${symlink.at}`)
-      }
-    } else {
-      echo(` -> Ok: exists -> ${symlink.at}`)
-    }
-  }
-}
-
-async function setupService() {
-  echo("\nSetup service")
-  for (const dir of ["app", "manager", "storage"])
-    fs.cpSync(`service/${dir}/.env.example`, `service/${dir}/.env`, { force: false })
-  echo(" -> Ok: created .env copies")
-
-  if (await $`docker -v`.exitCode != 0)
-    return echo(" -> warn: Install docker and run this again")
-
-  await $`sudo docker network create dev`.nothrow()
-  echo(" -> Ok: create network")
-
-  for (const vol of ["dev-app", "dev-manager", "dev-storage"])
-    await $`sudo docker volume create ${vol}`.nothrow()
-  echo(" -> Ok: create volume")
-}
 
 async function listApp() {
   const yetToInstall = []
@@ -177,8 +123,3 @@ async function setupSystemCtl(app) {
   } else echo(`    Ok: is-active -> ${systemctl.name}.service`)
 }
 
-function getEnvContent(path) {
-  const env = {}
-  dotenv.config({ path, processEnv: env })
-  return env
-}
