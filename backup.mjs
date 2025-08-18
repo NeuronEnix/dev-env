@@ -28,11 +28,34 @@ async function minify() {
   console.log("Minified!")
 }
 
+// Helper function to check if directory exists and has content
+function hasContent(dirPath) {
+  try {
+    if (!fs.existsSync(dirPath)) {
+      return false
+    }
+    const stats = fs.statSync(dirPath)
+    if (!stats.isDirectory()) {
+      return false
+    }
+    const items = fs.readdirSync(dirPath)
+    return items.length > 0
+  } catch (error) {
+    return false
+  }
+}
+
 async function zipDir() {
   echo("\Zipping...")
   let totalZipCount = 0, totalZipSize = 0
   for (const zipData of [...config.dirList, ...config.symlinkList, ...config.appList]) {
     if (!zipData.backupAs || !zipData.path) continue
+
+    // Check if directory exists and has content
+    if (!hasContent(zipData.path)) {
+      echo(`\nSkipping: ${zipData.backupAs} (${zipData.path}) - directory doesn't exist or is empty`)
+      continue
+    }
 
     echo(`\nBackup: ${zipData.backupAs} (${zipData.path})`)
     if ( zipData.systemctlStop ) {
