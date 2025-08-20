@@ -2,10 +2,10 @@
 
 import 'zx/globals'
 import { config } from './config.mjs'
-import { setupToBashrc } from './setup/bashrc.mjs'
-import { setupDirAndFile } from './setup/dir-file.mjs'
-import { setupSymlink } from './setup/symlink.mjs'
-import { setupService } from './setup/service.mjs'
+import { setupToBashrc } from './setup/setBashrc.mjs'
+import { setupDirAndFile } from './setup/setDirectory.mjs'
+import { setupSymlink } from './setup/setSymlink.mjs'
+import { setupService } from './setup/setService.mjs'
 // import dotenv from 'dotenv'
 // const envConfig = JSON.parse(fs.readFileSync('./env.config.json', 'utf8'))
 
