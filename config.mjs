@@ -57,6 +57,10 @@ export const config = {
       backupAs: "sym-syncthing", restore: true,
       systemctlStop: "syncthing",
     },
+    {
+      at: `${symlinkDir}/code-server`, path: `${os.homedir()}/.config/code-server`,
+      backupAs: "sym-code-server", restore: true,
+    },
   ],
 
   appList: [
@@ -152,6 +156,10 @@ export const config = {
     {
       name: "Tailscale", bin: "/usr/bin/tailscale",
       install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/tailscale.sh` },
+    },
+    {
+      name: "Code Server", bin: "/usr/bin/code-server",
+      install: { from: "file", path: `${os.homedir()}/dev-env/script/multiline-install-script/code-server.sh` },
     },
   ]
 }
