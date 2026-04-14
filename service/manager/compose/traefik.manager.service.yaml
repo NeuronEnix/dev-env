@@ -21,15 +21,15 @@ services:
       - --accesslog=true
       - --accesslog.filepath=/var/log/traefik/access.log
       # Uncomment to enable Datadog tracing + metrics
-      # - --tracing=true
-      # - --tracing.datadog=true
-      # - --tracing.datadog.localagenthostport=${DD_AGENT_HOST}:8126
-      # - --tracing.serviceName=traefik
-      # - --metrics.datadog=true
-      # - --metrics.datadog.address=${DD_AGENT_HOST}:8125
-      # - --metrics.datadog.addentrypointslabels=true
-      # - --metrics.datadog.addserviceslabels=true
-      # - --metrics.datadog.pushinterval=10s
+      - --tracing.otlp=true
+      - --tracing.otlp.grpc=true
+      - --tracing.otlp.grpc.endpoint=${DD_AGENT_HOST}:4317
+      - --tracing.otlp.grpc.insecure=true
+      - --metrics.datadog=true
+      - --metrics.datadog.address=${DD_AGENT_HOST}:8125
+      - --metrics.datadog.addentrypointslabels=true
+      - --metrics.datadog.addserviceslabels=true
+      - --metrics.datadog.pushinterval=10s
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - traefik-letsencrypt:/letsencrypt
