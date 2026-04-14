@@ -39,8 +39,8 @@ if [ ! -d "dev-env" ]; then
 fi
 cd ~/dev-env
 
-npm ci
-npm run start
+pnpm i
+pnpm start
 ```
 # Test Docker
 ```sh
