@@ -1,0 +1,12 @@
+services:
+  whoami:
+    image: ${WHOAMI_IMAGE}
+    container_name: ${COMPOSE_PROJECT_PREFIX}-whoami
+
+    restart: ${COMPOSE_RESTART_POLICY}
+    networks:
+      - net
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`${WHOAMI_HOST}`)
+      - traefik.http.routers.whoami.entrypoints=web

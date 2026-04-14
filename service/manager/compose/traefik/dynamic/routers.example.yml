@@ -1,0 +1,19 @@
+# Example: route to a service running on the host machine
+# Rename this file to routers.yml to activate
+
+http:
+  routers:
+    # Example: proxy to a local dev server on port 3000
+    local-app:
+      rule: Host(`app.localhost`)
+      entryPoints:
+        - web
+      service: local-app
+      middlewares:
+        - secure-headers
+
+  services:
+    local-app:
+      loadBalancer:
+        servers:
+          - url: http://host.docker.internal:3000
