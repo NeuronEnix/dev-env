@@ -1,1 +1,12 @@
-{"type":"module","scripts":{"start":"node setup.mjs","bk":"node backup.mjs","backup":"node backup.mjs"},"dependencies":{"dotenv":"^16.5.0","zx":"^7.2.3"}}
+{
+  "type": "module",
+  "scripts": {
+    "start": "node setup.mjs",
+    "bk": "node backup.mjs",
+    "backup": "node backup.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "zx": "^8.8.5"
+  }
+}
