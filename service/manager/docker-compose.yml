@@ -5,6 +5,7 @@ include:
   - compose/uptime-kuma.manager.service.yaml
   - compose/syncthing.manager.service.yaml
   - compose/watchtower.manager.service.yaml
+  - compose/traefik.manager.service.yaml
 
 networks:
   net:
