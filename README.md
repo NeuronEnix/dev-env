@@ -18,12 +18,12 @@ source ~/.bashrc
 
 # Install node using asdf
 asdf plugin-add nodejs
-asdf install nodejs 22.18.0
-asdf global nodejs 22.18.0
+asdf install nodejs 24.14.1
+asdf global nodejs 24.14.1
 
 asdf plugin-add golang
-asdf install golang 1.25.0
-asdf global golang 1.25.0
+asdf install golang 1.26.2
+asdf global golang 1.26.2
 
 npm install -g pnpm@latest-10
 
